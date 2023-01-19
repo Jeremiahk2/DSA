@@ -46,7 +46,7 @@ public class StudentIDComparatorTest {
 		assertTrue(comparator.compare(sOne, sTwo) < 0);
 		assertFalse(comparator.compare(sTwo, sOne) < 0);
 
-		assertTrue(comparator.compare(sThree, sThree) == 0);
+		assertEquals(comparator.compare(sThree, sThree), 0);
 		
 		assertTrue(comparator.compare(sFour, sFive) < 0);
 		

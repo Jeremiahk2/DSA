@@ -47,7 +47,7 @@ public class StudentGPAComparatorTest {
 		assertTrue(comparator.compare(sTwo, sOne) < 0);
 		assertFalse(comparator.compare(sOne, sTwo) < 0);
 
-		assertTrue(comparator.compare(sOne, sOne) == 0);
+		assertEquals(comparator.compare(sOne, sOne), 0);
 		assertTrue(comparator.compare(sFour, sFive) > 0);
 		assertFalse(comparator.compare(sFive, sFour) > 0);
 		
