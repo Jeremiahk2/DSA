@@ -27,7 +27,7 @@ public class StudentReader {
 	public static Student[] readInputAsArray(String filePath)
 	{
 		Student[] list = new Student[10];
-		try(Scanner scan = new Scanner(new FileInputStream(filePath),"UTF8"))
+		try(Scanner scan = new Scanner(new FileInputStream(filePath), "UTF8"))
 		{
 			scan.nextLine(); // SKIP HEADER LINE
 			int index = 0;
@@ -53,7 +53,15 @@ public class StudentReader {
 	 * @return a Student representation of the input line
 	 */
 	private static Student processLine(String line) {
-		// TODO: complete this method
-		return null;
+		Scanner lineScanner = new Scanner(line);
+		lineScanner.useDelimiter(",");
+		String first = lineScanner.next();
+		String last = lineScanner.next();
+		String unityID = lineScanner.next();
+		int id = lineScanner.nextInt();
+		double gpa = lineScanner.nextDouble();
+		int hours = lineScanner.nextInt();
+		lineScanner.close();
+		return new Student(first, last, id, hours, gpa, unityID);
 	}
 }
