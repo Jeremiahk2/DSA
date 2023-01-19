@@ -9,6 +9,7 @@ import edu.ncsu.csc316.dsa.sorter.Sorter;
  * StudentManager manages Student information. StudentManager
  * can sort a Student roster.
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class StudentManager {
@@ -41,6 +42,7 @@ public class StudentManager {
 	public StudentManager(String pathToFile)
 	{
 		this(pathToFile, new InsertionSorter<Student>());
+		sorter = new InsertionSorter<Student>();
 	}
 		
     /**

@@ -6,8 +6,16 @@ import org.junit.Test;
 
 import edu.ncsu.csc316.dsa.data.Student;
 
+/**
+ * test class for StudentReader
+ * @author Jeremiah Knizley
+ *
+ */
 public class StudentReaderTest {
 	
+	/**
+	 * Tests readInputAsArray to ensure all students are read and are in the correct place in the array
+	 */
 	@Test
 	public void testReadFile() {
 		Student[] contents = StudentReader.readInputAsArray("input/student_ascendingID.csv");
@@ -29,7 +37,35 @@ public class StudentReaderTest {
 		assertEquals("Dante", contents[15].getFirst());
 	}
 	
-	// TODO: Add test cases
-	// Suggestions:
-	// -> Test that each line processes the data in the correct order
+	/**
+	 * Tests that processLine puts information in the correct field in Student
+	 */
+	@Test
+	public void testProcessLine() {
+		Student[] contents = StudentReader.readInputAsArray("input/student_ascendingID.csv");
+
+			assertEquals("Amber", contents[0].getFirst());
+			assertEquals("Michael", contents[0].getLast());
+			assertEquals("michaea", contents[0].getUnityID());
+			assertEquals(1, contents[0].getId());
+			assertTrue(1.1 == contents[0].getGpa());
+			assertFalse(1.1 != contents[0].getGpa());
+			assertEquals(10, contents[0].getCreditHours());
+			
+			assertEquals("Ara", contents[1].getFirst());
+			assertEquals("Marsh", contents[1].getLast());
+			assertEquals("marsha", contents[1].getUnityID());
+			assertEquals(3, contents[1].getId());
+			assertTrue(2.25 == contents[1].getGpa());
+			assertFalse(2.25 != contents[1].getGpa());
+			assertEquals(11, contents[1].getCreditHours());
+			
+			assertEquals("Lacie", contents[2].getFirst());
+			assertEquals("Mott", contents[2].getLast());
+			assertEquals("mottl", contents[2].getUnityID());
+			assertEquals(4, contents[2].getId());
+			assertTrue(2.94 == contents[2].getGpa());
+			assertFalse(2.94 != contents[2].getGpa());
+			assertEquals(18, contents[2].getCreditHours());
+	}
 }
