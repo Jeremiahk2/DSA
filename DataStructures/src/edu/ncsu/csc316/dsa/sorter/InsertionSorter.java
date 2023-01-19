@@ -26,4 +26,10 @@ public class InsertionSorter<E extends Comparable<E>> implements Sorter<E> {
 			data[j + 1] = misplaced;
 		}
 	}
+	
+	private class NaturalOrder implements Comparator<E> {
+		public int compare(E first, E second) {
+			return ((Comparable<E>) first).compareTo(second);
+		}
+	}
 }
