@@ -4,18 +4,26 @@ import java.util.Comparator;
 
 /**
  * Comparator for comparing Students based on GPA
+ * @author Jeremiah Knizley
  * @author Dr. King
  *
  */
-public class StudentGPAComparator implements Comparator<Student>{
+public class StudentGPAComparator implements Comparator<Student> {
 
 	/**
 	 * Compares students based on GPA in descending order
 	 */
 	@Override
 	public int compare(Student one, Student two) {
-		//TODO: Complete this method
-		return 0;
+		if (one.getGpa() < two.getGpa()) {
+			return 1;
+		}
+		else if (one.getGpa() > two.getGpa()) {
+			return -1;
+		}
+		else {
+			return one.compareTo(two);
+		}
 	}
 
 }

@@ -4,17 +4,29 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * Test class for StudentIdComparator
+ * @author Jeremiah Knizley
+ *
+ */
 public class StudentIDComparatorTest {
 
+	/** Test student one */
 	private Student sOne;
+	/** Test student two */
 	private Student sTwo;
+	/** Test student three */
 	private Student sThree;
+	/** Test student four */
 	private Student sFour;
+	/** Test student five */
 	private Student sFive;
-
+	/** The StudentIdComparator to be used for testing */
 	private StudentIDComparator comparator;
 
+	/**
+	 * Setup method for testing purpose. Initializes fields.
+	 */
 	@Before
 	public void setUp() {
 		sOne = new Student("OneFirst", "OneLast", 1, 1, 1.0, "oneUnityID");
@@ -26,12 +38,19 @@ public class StudentIDComparatorTest {
 		comparator = new StudentIDComparator();
 	}
 
+	/**
+	 * Test method for Compare method
+	 */
 	@Test
 	public void testCompare() {
 		assertTrue(comparator.compare(sOne, sTwo) < 0);
 		assertFalse(comparator.compare(sTwo, sOne) < 0);
 
-		// TODO: Add test cases
+		assertTrue(comparator.compare(sThree, sThree) == 0);
+		
+		assertTrue(comparator.compare(sFour, sFive) < 0);
+		
+		assertTrue(comparator.compare(sThree,  sFour) < 0);
 	}
 
 
