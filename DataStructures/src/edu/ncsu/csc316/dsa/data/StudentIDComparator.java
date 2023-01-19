@@ -15,8 +15,15 @@ public class StudentIDComparator implements Comparator<Student> {
 	 */
 	@Override
 	public int compare(Student one, Student two) {
-		//TODO: Complete this method
-		return 0;
+		if (one.getId() < two.getId()) {
+			return -1;
+		}
+		else if (one.getId() > two.getId()) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 }
