@@ -48,24 +48,22 @@ public class StudentReaderTest {
 			assertEquals("Michael", contents[0].getLast());
 			assertEquals("michaea", contents[0].getUnityID());
 			assertEquals(1, contents[0].getId());
-			assertTrue(1.1 == contents[0].getGpa());
-			assertFalse(1.1 != contents[0].getGpa());
+			System.out.println(contents[0].getGpa());
+			assertEquals(1.1, contents[0].getGpa(), .001);
 			assertEquals(10, contents[0].getCreditHours());
 			
 			assertEquals("Ara", contents[1].getFirst());
 			assertEquals("Marsh", contents[1].getLast());
 			assertEquals("marsha", contents[1].getUnityID());
 			assertEquals(3, contents[1].getId());
-			assertTrue(2.25 == contents[1].getGpa());
-			assertFalse(2.25 != contents[1].getGpa());
+			assertEquals(2.25, contents[1].getGpa(), .001);
 			assertEquals(11, contents[1].getCreditHours());
 			
 			assertEquals("Lacie", contents[2].getFirst());
 			assertEquals("Mott", contents[2].getLast());
 			assertEquals("mottl", contents[2].getUnityID());
 			assertEquals(4, contents[2].getId());
-			assertTrue(2.94 == contents[2].getGpa());
-			assertFalse(2.94 != contents[2].getGpa());
+			assertEquals(2.94, contents[2].getGpa(), .001);
 			assertEquals(18, contents[2].getCreditHours());
 	}
 }

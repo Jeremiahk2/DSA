@@ -11,5 +11,5 @@ public interface Identifiable {
 	 * returns the ID
 	 * @return the ID
 	 */
-	public int getId();
+	int getId();
 }

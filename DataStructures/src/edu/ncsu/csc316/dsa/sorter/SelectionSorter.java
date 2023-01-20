@@ -34,7 +34,7 @@ public class SelectionSorter<E extends Comparable<E>> extends AbstractComparison
         for (int i = 0; i <= data.length - 1; i++) {
         	int min = i;
         	for (int j = i + 1; j <= data.length - 1; j++) {
-        		if (compare(data[j], (data[min])) < 0) {
+        		if (compare(data[j], data[min]) < 0) {
         			min = j;
         		}
         	}
