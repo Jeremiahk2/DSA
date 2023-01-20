@@ -9,7 +9,7 @@ public interface Sorter<E> {
 	
 	/**
 	 * Sorts an array of integer values.
-	 * @param values the values to be sorted
+	 * @param data the values to be sorted
 	 */
 	void sort(E[] data);
 }

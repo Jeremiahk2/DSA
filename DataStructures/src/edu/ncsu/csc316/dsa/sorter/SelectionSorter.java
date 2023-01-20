@@ -18,6 +18,14 @@ public class SelectionSorter<E extends Comparable<E>> extends AbstractComparison
     public SelectionSorter(Comparator<E> comparator) {
         super(comparator);
     }
+    
+    /**
+     * Constructs a selection sorter using a Natural Ordering comparator (compareTo)
+     */
+    public SelectionSorter() {
+    	super(null);
+    }
+    
     /**
      * sorts the data using the comparator
      * @param data the data to be sorted

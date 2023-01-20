@@ -20,6 +20,13 @@ public class BubbleSorter<E extends Comparable<E>> extends AbstractComparisonSor
 	public BubbleSorter(Comparator<E> comparator) {
         super(comparator);
     }
+	
+	/**
+	 * Constructs a bubble sorter with Natural Order paramater (compareTo)
+	 */
+	public BubbleSorter() {
+		super(null);
+	}
 	/**
 	 * Sorts the values using the bubble sorting algorithm.
 	 */
