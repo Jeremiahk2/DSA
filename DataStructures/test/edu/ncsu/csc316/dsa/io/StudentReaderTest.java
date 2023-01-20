@@ -48,7 +48,6 @@ public class StudentReaderTest {
 			assertEquals("Michael", contents[0].getLast());
 			assertEquals("michaea", contents[0].getUnityID());
 			assertEquals(1, contents[0].getId());
-			System.out.println(contents[0].getGpa());
 			assertEquals(1.1, contents[0].getGpa(), .001);
 			assertEquals(10, contents[0].getCreditHours());
 			
