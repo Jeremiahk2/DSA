@@ -45,21 +45,4 @@ public class SelectionSorter<E extends Comparable<E>> extends AbstractComparison
         	}
         }
     }
-    
-//    /**
-//     * Class for determining the natural order for comparisons in the event a comparator is not specified
-//     * @author Jeremiah Knizley
-//     *
-//     */
-//    class NaturalOrder implements Comparator<E> {
-//    	/**
-//    	 * compares the first element to the second element using first's compareTo (the natural ordering).
-//    	 * @param first the first object, which will use compareTo
-//    	 * @param second the second object, which will be compared with first
-//    	 * @return 0 if the two are considered equal, -1 if first comes before second, 1 if first comes after second.
-//    	 */
-//        public int compare(E first, E second) {
-//            return ((Comparable<E>) first).compareTo(second);
-//        }
-//    }
 }

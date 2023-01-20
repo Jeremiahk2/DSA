@@ -29,6 +29,7 @@ public class BubbleSorter<E extends Comparable<E>> extends AbstractComparisonSor
 	}
 	/**
 	 * Sorts the values using the bubble sorting algorithm.
+	 * @param data the data to be sorted
 	 */
 	@Override
 	public void sort(E[] data) {

@@ -11,8 +11,6 @@ import java.util.Comparator;
  */
 public class InsertionSorter<E extends Comparable<E>> extends AbstractComparisonSorter<E> implements Sorter<E> {
 
-//	/** the comparator object to be used for sorting */
-//	private Comparator<E> comparator;
 	/** default constructor for InsertionSorter. Sets comparator to null */
 	public InsertionSorter() {
 		this(null);
@@ -24,17 +22,6 @@ public class InsertionSorter<E extends Comparable<E>> extends AbstractComparison
 	public InsertionSorter(Comparator<E> comparator) {
 		super(comparator);
 	}
-//	/**
-//	 * sets the comparator to the parameter, unless it is null, in which case the natural order is used.
-//	 * @param comparator the comparator to be set
-//	 */
-//	private void setComparator(Comparator<E> comparator) {
-//        if(comparator == null) {
-//            this.comparator = new NaturalOrder();
-//        } else {
-//            this.comparator = comparator;
-//        }
-//    }
 	/**
 	 * Sorts data using the Insertion sorting algorithm
 	 * @param data the data to be sorted
@@ -50,22 +37,4 @@ public class InsertionSorter<E extends Comparable<E>> extends AbstractComparison
 			data[j + 1] = misplaced;
 		}
 	}
-	
-//	/**
-//	 * Inner class for maintaining the natural order used by InsertionSorter.
-//	 * @author Jeremiah Knizley
-//	 *
-//	 */
-//	private class NaturalOrder implements Comparator<E> {
-//		/**
-//		 * Sets the natural ordering to compareTo from Comparable
-//		 * First and second are arbitrary except that if first comes before, a -1 is returned, if first comes after, a 1 is returned.
-//		 * @param first the first object to be compared
-//		 * @param second the second object to be compared
-//		 * @return the int gained from using first's compareTo method with second as the parameter.
-//		 */
-//		public int compare(E first, E second) {
-//			return ((Comparable<E>) first).compareTo(second);
-//		}
-//	}
 }

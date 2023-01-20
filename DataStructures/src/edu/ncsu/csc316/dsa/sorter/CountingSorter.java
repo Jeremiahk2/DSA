@@ -11,6 +11,10 @@ import edu.ncsu.csc316.dsa.data.Identifiable;
  */
 public class CountingSorter<E extends Identifiable> implements Sorter<E> {
 
+	/**
+	 * Sorts values according to the Counting algorithm
+	 * @param values the values to be sorted
+	 */
 	@Override
 	public void sort(E[] values) {
 		//Find the min and the max elements in the input data

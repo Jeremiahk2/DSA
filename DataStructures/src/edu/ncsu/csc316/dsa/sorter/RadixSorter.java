@@ -11,6 +11,10 @@ import edu.ncsu.csc316.dsa.data.Identifiable;
  */
 public class RadixSorter<E extends Identifiable> implements Sorter<E> {
 
+	/**
+	 * Sorts values using RadixSort algorithm
+	 * @param values the values to be sorted
+	 */
 	@Override
 	public void sort(E[] values) {
 		//Find the largest value in the input data

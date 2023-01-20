@@ -2,8 +2,6 @@ package edu.ncsu.csc316.dsa.sorter;
 
 import java.util.Comparator;
 
-//import edu.ncsu.csc316.dsa.sorter.SelectionSorter.NaturalOrder;
-
 /**
  * Abstract super class for comparison sorters. Allows the sharing of common methods and data between comparison sorting algorithms
  * @author Jeremiah Knizley

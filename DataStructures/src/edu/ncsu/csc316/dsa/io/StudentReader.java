@@ -15,6 +15,7 @@ import edu.ncsu.csc316.dsa.data.Student;
  *    FIRST_NAME,LAST_NAME,UNITY_ID,STUDENT_ID,GPA,CREDIT_HOURS
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class StudentReader {
