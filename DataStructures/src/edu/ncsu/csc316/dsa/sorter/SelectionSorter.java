@@ -5,6 +5,7 @@ import java.util.Comparator;
 /**
  * SelectionSorter uses the selection sort algorithm to sort data
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the generic type of data to sort
  */
