@@ -2,23 +2,34 @@ package edu.ncsu.csc316.dsa.sorter;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Comparator;
+//import java.util.Comparator;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc316.dsa.data.Student;
 
+/**
+ * class for testing CountingSorter
+ * @author Jeremiah Knizley
+ *
+ */
 public class CountingSorterTest {
 	
+	/** Testing Student one */
 	private Student sOne;
+	/** Testing Student two */
 	private Student sTwo;
+	/** Testing Student three */
 	private Student sThree;
+	/** Testing Student four */
 	private Student sFour;
+	/** Testing Student five */
 	private Student sFive;
-	
+	/** CountingSorter for testing purposes */
 	private CountingSorter<Student> sorter;
 
+	/** Setup method. Initializes fields to testing values */
 	@Before
 	public void setUp() {
 		sOne = new Student("OneFirst", "OneLast", 1, 1, 1.0, "oneUnityID");
@@ -30,6 +41,9 @@ public class CountingSorterTest {
 		sorter = new CountingSorter<Student>();
 	}
 	
+	/**
+	 * Tests sorting students 
+	 */
 	@Test
 	public void testSortStudent() {
 		Student[] original = { sTwo, sOne, sFour, sThree, sFive };
@@ -41,6 +55,32 @@ public class CountingSorterTest {
 		assertEquals(sFive, original[4]);
 	}
 	
-	// TODO: Add test cases
+	/**
+	 * Tests sorting students with reverse ID order
+	 */
+	@Test
+	public void testSortReverse() {
+		Student[] reverse = { sFive, sFour, sThree, sTwo, sOne };
+		sorter.sort(reverse);
+		assertEquals(sOne, reverse[0]);
+		assertEquals(sTwo, reverse[1]);
+		assertEquals(sThree, reverse[2]);
+		assertEquals(sFour, reverse[3]);
+		assertEquals(sFive, reverse[4]);
+	}
+	
+	/**
+	 * Tests sorting students in the correct order already
+	 */
+	@Test
+	public void testSortInOrder() {
+		Student[] ascending = {sOne, sTwo, sThree, sFour, sFive};
+		sorter.sort(ascending);
+		assertEquals(sOne, ascending[0]);
+		assertEquals(sTwo, ascending[1]);
+		assertEquals(sThree, ascending[2]);
+		assertEquals(sFour, ascending[3]);
+		assertEquals(sFive, ascending[4]);
+	}
 
 }

@@ -42,7 +42,6 @@ public class StudentManager {
 	public StudentManager(String pathToFile)
 	{
 		this(pathToFile, new InsertionSorter<Student>());
-		sorter = new InsertionSorter<Student>();
 	}
 		
     /**
