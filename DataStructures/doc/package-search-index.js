@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"edu.ncsu.csc316.dsa.data"},{"l":"edu.ncsu.csc316.dsa.io"},{"l":"edu.ncsu.csc316.dsa.manager"},{"l":"edu.ncsu.csc316.dsa.sorter"}];updateSearchResults();
