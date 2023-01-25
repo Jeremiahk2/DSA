@@ -74,17 +74,23 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 
 	@Override
 	public E remove(int index) {
-		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException();
+		E element = get(index);
+		for (int i = index; i < size - 1; i++) {
+			data[i] = data[i + 1];
 		}
-		
-		return null;
+		data[size - 1] = null;
+		size--;
+		return element;
 	}
 
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
-		return null;
+		if (element == null) {
+			throw new NullPointerException();
+		}
+		E rtnValue = get(index);
+		data[index] = element;
+		return rtnValue;
 	}
 
 	@Override
