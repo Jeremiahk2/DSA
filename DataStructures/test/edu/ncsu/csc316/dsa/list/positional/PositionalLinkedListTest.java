@@ -16,10 +16,12 @@ import edu.ncsu.csc316.dsa.Position;
  * an doubly-linked positional list data structure
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class PositionalLinkedListTest {
 
+	/** a PositionalList that contains strings to use for testing */
     private PositionalList<String> list;
     
     /**
@@ -44,7 +46,15 @@ public class PositionalLinkedListTest {
         assertEquals(1, list.size());
         assertEquals(first, list.first());
         
-        //TODO: complete this test case
+        Position<String> second = list.addFirst("second");
+        assertEquals(2, list.size());
+        assertEquals(second, list.first());
+        
+        list.addLast("Last");
+        assertEquals(3, list.size());
+        assertEquals(second, list.first());
+        
+        
     }
     
     /**
@@ -52,7 +62,22 @@ public class PositionalLinkedListTest {
      */
     @Test
     public void testLast() {
-        //TODO: complete this test case
+    	assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+        
+        assertNull(list.last());
+        
+        Position<String> first = list.addFirst("one");
+        assertEquals(1, list.size());
+        assertEquals(first, list.last());
+        
+        list.addFirst("second");
+        assertEquals(2, list.size());
+        assertEquals(first, list.last());
+        
+        Position<String> last = list.addLast("Last");
+        assertEquals(3, list.size());
+        assertEquals(last, list.last());
     }
     
     /**
@@ -65,8 +90,22 @@ public class PositionalLinkedListTest {
         Position<String> first = list.addFirst("one");
         assertEquals(1, list.size());
         assertFalse(list.isEmpty());
+        assertEquals(first, list.first());
         
-        //TODO: complete this test case
+        Position<String> second = list.addFirst("Second");
+        assertEquals(2, list.size());
+        assertEquals(second, list.first());
+        assertEquals(first, list.last());
+        assertEquals(first, list.after(second));
+        
+        Position<String> newFirst = list.addFirst("NewFirst");
+        
+        assertEquals(second, list.after(newFirst));
+        assertEquals(newFirst, list.before(second));
+        
+        assertNull(list.before(newFirst));
+        
+        
     }
     
     /**
@@ -78,24 +117,14 @@ public class PositionalLinkedListTest {
         assertTrue(list.isEmpty());
         Position<String> first = list.addLast("one");
         assertEquals(1, list.size());
+        assertEquals(first, list.first());
+        assertNull(list.after(first));
+        assertNull(list.before(first));
         
-        //TODO: complete this test case
-    }
-    
-    /**
-     * Test the output of the before(position) behavior, including expected exceptions
-     */ 
-    @Test
-    public void testBefore() {
-        //TODO: complete this test case
-    }
-    
-    /**
-     * Test the output of the after(position) behavior, including expected exceptions
-     */     
-    @Test
-    public void testAfter() {
-        //TODO: complete this test case
+        Position<String> second = list.addLast("Second");
+        assertEquals(second, list.last());
+        assertNull(list.after(second));
+        assertEquals(first, list.before(second));
     }
     
     /**
@@ -103,7 +132,27 @@ public class PositionalLinkedListTest {
      */     
     @Test
     public void testAddBefore() {
-        //TODO: complete this test case
+    	assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+        Position<String> first = list.addLast("one");
+        assertEquals(1, list.size());
+        assertEquals(first, list.first());
+        assertNull(list.after(first));
+        assertNull(list.before(first));
+        
+        Position<String> second = list.addBefore(first, "Second");
+        assertEquals(second, list.before(first));
+        assertEquals(first, list.after(second));
+        
+        Position<String> third = list.addBefore(first, "third");
+        assertEquals(second, list.first());
+        Position<String> fourth = list.addBefore(third, "fourth");
+        assertEquals(third, list.after(fourth));
+        assertEquals(fourth, list.before(third));
+        Position<String> fifth = list.addBefore(first, "fifth");
+        assertEquals(first, list.last());
+        assertEquals(third, list.before(fifth));
+        assertEquals(fifth, list.after(third));
     }
     
     /**
@@ -111,7 +160,31 @@ public class PositionalLinkedListTest {
      */     
     @Test
     public void testAddAfter() {
-        //TODO: complete this test case
+    	Position<String> first = list.addFirst("one");
+    	Position<String> second = list.addAfter(first, "Second");
+    	assertEquals(second, list.after(first));
+    	assertEquals(first, list.before(second));
+    	assertEquals(second, list.last());
+    	Position<String> third = list.addAfter(second, "third");
+    	assertEquals(third, list.after(second));
+    	assertEquals(second, list.before(third));
+    	assertEquals(third, list.last());
+    	Position<String> fourth = list.addAfter(third, "fourth");
+    	assertEquals(fourth, list.after(third));
+    	assertEquals(third, list.before(fourth));
+    	assertEquals(fourth, list.last());
+    	Position<String> fifth = list.addAfter(fourth, "fifth");
+    	assertEquals(fifth, list.after(fourth));
+    	assertEquals(fourth, list.before(fifth));
+    	assertEquals(fifth, list.last());
+    	
+    	assertEquals(first, list.first());
+    	
+    	Position<String> wildcard = list.addAfter(second, "wildcard");
+    	
+    	assertEquals(wildcard, list.after(second));
+    	assertEquals(second, list.before(wildcard));
+    	assertEquals(6, list.size());
     }
     
     /**
@@ -119,7 +192,14 @@ public class PositionalLinkedListTest {
      */     
     @Test
     public void testSet() {
-        //TODO: complete this test case
+    	Position<String> first = list.addFirst("one");
+    	Position<String> second = list.addAfter(first, "Second");
+    	Position<String> third = list.addAfter(second, "third");
+    	Position<String> fourth = list.addAfter(third, "fourth");
+    	Position<String> fifth = list.addAfter(fourth, "fifth");
+    	String oldFifth = list.set(fifth, "BetterFifth");
+    	assertEquals(oldFifth, "fifth");
+    	assertEquals("BetterFifth", fifth.getElement());
     }
     
     /**
@@ -127,7 +207,19 @@ public class PositionalLinkedListTest {
      */     
     @Test
     public void testRemove() {
-        //TODO: complete this test case
+    	Position<String> first = list.addFirst("first");
+    	Position<String> second = list.addAfter(first, "second");
+    	Position<String> third = list.addAfter(second, "third");
+    	Position<String> fourth = list.addAfter(third, "fourth");
+    	Position<String> fifth = list.addAfter(fourth, "fifth");
+    	assertEquals("fifth", list.remove(fifth));
+    	assertEquals(fourth, list.last());
+    	assertNull(list.after(fourth));
+    	assertEquals("first", list.remove(first));
+    	assertEquals(second, list.first());
+    	assertEquals("third", list.remove(third));
+    	assertEquals(fourth, list.after(second));
+    	assertEquals(second, list.before(fourth));
     }
     
     /**

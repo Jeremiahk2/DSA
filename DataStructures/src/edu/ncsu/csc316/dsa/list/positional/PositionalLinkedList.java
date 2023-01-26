@@ -20,6 +20,7 @@ import edu.ncsu.csc316.dsa.Position;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley and Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the positional list
  */
@@ -51,62 +52,72 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 	}
 	
 	private Position<E> addBetween(E element, PositionalNode<E> next, PositionalNode<E> prev) {
-        
-		return null;
+        PositionalNode<E> newNode = new PositionalNode<>(element);
+        newNode.setNext(next);
+        newNode.setPrevious(prev);
+        prev.setNext(newNode);
+        next.setPrevious(newNode);
+        size++;
+		return newNode;
     }
 
 	@Override
 	public Position<E> addAfter(Position<E> p, E element) {
-		// TODO Auto-generated method stub
-		return null;
+		return addBetween(element, validate(p).getNext(), validate(p));
 	}
 
 	@Override
 	public Position<E> addBefore(Position<E> p, E element) {
-		// TODO Auto-generated method stub
-		return null;
+		return addBetween(element, validate(p), validate(p).getPrevious());
 	}
 
 	@Override
 	public Position<E> addFirst(E element) {
-		// TODO Auto-generated method stub
-		return null;
+		return addBetween(element, front.getNext(), front);
 	}
 
 	@Override
 	public Position<E> addLast(E element) {
-		// TODO Auto-generated method stub
-		return null;
+		return addBetween(element, tail, tail.getPrevious());
 	}
 
 	@Override
 	public Position<E> after(Position<E> p) {
-		// TODO Auto-generated method stub
-		return null;
+		Position<E> after = validate(p).getNext();
+		if (after == tail) {
+			return null;
+		}
+		return after;
 	}
 
 	@Override
 	public Position<E> before(Position<E> p) {
-		// TODO Auto-generated method stub
-		return null;
+		Position<E> before = validate(p).getPrevious();
+		if (before == front) {
+			return null;
+		}
+		return before;
 	}
 
 	@Override
 	public Position<E> first() {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			return null;
+		}
+		return front.getNext();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return size == 0;
 	}
 
 	@Override
 	public Position<E> last() {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			return null;
+		}
+		return tail.getPrevious();
 	}
 
 	@Override
@@ -117,20 +128,25 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 
 	@Override
 	public E remove(Position<E> p) {
-		// TODO Auto-generated method stub
-		return null;
+		E old = p.getElement();
+		PositionalNode<E> oldNode = validate(p);
+		oldNode.getPrevious().setNext(oldNode.getNext());
+		oldNode.getNext().setPrevious(oldNode.getPrevious());
+		size--;
+		return old;
 	}
 
 	@Override
 	public E set(Position<E> p, E element) {
-		// TODO Auto-generated method stub
-		return null;
+		PositionalNode<E> node = validate(p);
+		E old = node.getElement();
+		node.setElement(element);
+		return old;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 	
 	/**
@@ -150,8 +166,11 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 	
 	private static class PositionalNode<E> implements Position<E> {
 
+		/** the data in the node */
         private E element;
+        /** the next node after this one */
         private PositionalNode<E> next;
+        /** the previous node before this one */
         private PositionalNode<E> previous;
 
         public PositionalNode(E value) {
