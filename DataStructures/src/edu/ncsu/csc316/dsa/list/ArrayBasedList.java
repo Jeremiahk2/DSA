@@ -165,5 +165,4 @@ public class ArrayBasedList<E> extends AbstractList<E> {
             data = Arrays.copyOf(data, newCapacity);
         }
     }
-    //TODO: Complete this class
 }
