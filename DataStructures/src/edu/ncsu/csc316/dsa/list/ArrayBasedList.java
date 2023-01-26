@@ -2,6 +2,7 @@ package edu.ncsu.csc316.dsa.list;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * An array-based list is a contiguous-memory representation of the List
@@ -50,13 +51,11 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 
 	@Override
 	public void add(int index, E element) {
-		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException();
-		}
+		checkIndexForAdd(index);
 		if (element == null) {
 			throw new NullPointerException();
 		}
-		checkIndex(DEFAULT_CAPACITY);
+		ensureCapacity(size() + 1);
 		for (int i = size; i > index; i--) {
 			data[i] = data[i - 1];
 		}
@@ -66,9 +65,7 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 
 	@Override
 	public E get(int index) {
-		if (index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException();
-		}
+		checkIndex(index);
 		return data[index];
 	}
 
@@ -85,9 +82,7 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 
 	@Override
 	public E set(int index, E element) {
-		if (element == null) {
-			throw new NullPointerException();
-		}
+		checkIndex(index);
 		E rtnValue = get(index);
 		data[index] = element;
 		return rtnValue;
@@ -100,8 +95,55 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ElementIterator();
+	}
+	
+	private class ElementIterator implements Iterator<E> {
+		/** the current position in the list (The index of the element that will be returned by next */
+	    private int position;
+	    /** boolean for whether or not remove can be used */
+	    private boolean removeOK;
+
+	    /**
+	     * Construct a new element iterator where the cursor is initialized 
+	     * to the beginning of the list.
+	     */
+	    public ElementIterator() {
+	        position = 0;
+	        removeOK = false;
+	    }
+
+	    @Override
+	    public boolean hasNext() {
+	        if (size > position) {
+	        	return true;
+	        }
+	        return false;
+	    }
+
+	    @Override
+	    public E next() {
+	    	if (!hasNext()) {
+	    		throw new NoSuchElementException();
+	    	}
+	    	int index = position;
+	    	position++;
+	    	removeOK = true;
+    		return data[index];
+	    	
+	    }
+	        
+	    @Override
+	    public void remove() {
+	        if (removeOK) {
+	        	position--;
+	        	ArrayBasedList.this.remove(position);
+	        	removeOK = false;
+	        }
+	        else {
+	        	throw new IllegalStateException();
+	        }
+	    }
 	}
     
 	/**

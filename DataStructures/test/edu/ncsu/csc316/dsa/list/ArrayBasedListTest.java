@@ -2,6 +2,7 @@ package edu.ncsu.csc316.dsa.list;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Before;
@@ -17,6 +18,7 @@ import org.junit.Test;
  */
 public class ArrayBasedListTest {
 
+	/** list used for testing purposes */
     private List<String> list;
 
     /**
@@ -62,7 +64,13 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testAddLast() {
-        //TODO: complete this test case
+        list.addLast("First");
+        assertEquals(1, list.size());
+        assertEquals("First", list.get(0));
+        list.addLast("Second");
+        assertEquals(2, list.size());
+        assertEquals("Second", list.get(1));
+        
     }
 
     /**
@@ -70,7 +78,21 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testLast() {
-        //TODO: complete this test case
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.last());
+    	
+    	list.addLast("First");
+    	assertEquals("First", list.last());
+    	list.addLast("Second");
+    	assertEquals("Second", list.last());
+    	list.addLast("Third");
+    	assertEquals("Third", list.last());
+    	list.addLast("Fourth");
+    	assertEquals("Fourth", list.last());
+    	list.addLast("Fifth");
+    	assertEquals("Fifth", list.last());
+    	list.addFirst("NewFirst");
+    	assertEquals("Fifth", list.last());
+    	
     }
 
     /**
@@ -78,7 +100,32 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testAddFirst() {
-        //TODO: complete this test case
+    	list.addFirst("First");
+    	assertEquals("First", list.get(0));
+    	assertEquals(1, list.size());
+    	list.addFirst("Second");
+    	assertEquals(2, list.size());
+    	assertEquals("First", list.get(1));
+    	assertEquals("Second", list.get(0));
+    	list.addFirst("Third");
+    	assertEquals(3, list.size());
+    	assertEquals("First", list.get(2));
+    	assertEquals("Second", list.get(1));
+    	assertEquals("Third", list.get(0));
+    	list.addFirst("Fourth");
+    	assertEquals(4, list.size());
+    	assertEquals("First", list.get(3));
+    	assertEquals("Second", list.get(2));
+    	assertEquals("Third", list.get(1));
+    	assertEquals("Fourth", list.get(0));
+    	list.addFirst("Fifth");
+    	assertEquals(5, list.size());
+    	assertEquals("First", list.get(4));
+    	assertEquals("Second", list.get(3));
+    	assertEquals("Third", list.get(2));
+    	assertEquals("Fourth", list.get(1));
+    	assertEquals("Fifth", list.get(0));
+    	
     }
 
     /**
@@ -86,7 +133,19 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testFirst() {
-        //TODO: complete this test case
+    	//assertThrows(IndexOutOfBoundsException.class, () -> list.first());
+    	list.addFirst("First");
+    	assertEquals("First", list.first());
+    	list.addFirst("Second");
+    	assertEquals("Second", list.first());
+    	list.addFirst("Third");
+    	assertEquals("Third", list.first());
+    	list.addFirst("Fourth");
+    	assertEquals("Fourth", list.first());
+    	list.addFirst("Fifth");
+    	assertEquals("Fifth", list.first());
+    	list.addLast("Sixth");
+    	assertEquals("Fifth", list.first());
     }
 
     /**
@@ -134,7 +193,45 @@ public class ArrayBasedListTest {
             assertTrue(e instanceof NoSuchElementException);
         }
 
-        //TODO: continue this test case
+        it.remove();
+        assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(0));
+        try{
+            it.remove();
+            fail("An IllegalStateException should have been thrown");           
+        } catch(Exception e) {
+            assertTrue(e instanceof IllegalStateException);
+        }
+        
+        list.addLast("NewOne");
+        list.addLast("Two");
+        list.addLast("Three");
+        list.addLast("Four");
+        assertEquals("NewOne", it.next());
+        assertEquals("Two", it.next());
+        assertEquals("Three", it.next());
+        assertEquals("Four", it.next());
+        try{
+            it.remove();        
+        } catch(Exception e) {
+            fail("Remove should not throw an exception here");
+        }
+        try{
+            it.remove();
+            fail("An IllegalStateException should have been thrown");           
+        } catch(Exception e) {
+            assertTrue(e instanceof IllegalStateException);
+        }
+        assertFalse(it.hasNext());
+        try{
+            it.next();
+            fail("A NoSuchElementException should have been thrown");           
+        } catch(Exception e) {
+            assertTrue(e instanceof NoSuchElementException);
+        }
+        
+        
     }
 
     /**
@@ -142,7 +239,26 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testRemoveIndex() {
-        //TODO: complete this test case
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.remove(0));
+    	
+    	list.addLast("First");
+    	list.addLast("Second");
+    	list.addLast("Third");
+    	list.addLast("Fourth");
+    	list.addLast("Fifth");
+    	list.addLast("Sixth");
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.remove(-1));
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.remove(6));
+    	
+    	assertEquals("Fourth", list.remove(3));
+    	assertEquals("Fifth", list.get(3));
+    	assertEquals(5, list.size());
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.remove(5));
+    	assertEquals("First", list.remove(0));
+    	assertEquals(4, list.size());
+    	assertEquals("Second", list.get(0));
+    	
+    	
     }
 
     /**
@@ -150,7 +266,32 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testRemoveFirst() {
-        //TODO: complete this test case
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.removeFirst());
+    	
+    	list.addLast("First");
+    	list.addLast("Second");
+    	list.addLast("Third");
+    	list.addLast("Fourth");
+    	list.addLast("Fifth");
+    	list.addLast("Sixth");
+    	
+    	assertEquals("First", list.removeFirst());
+    	assertEquals(5, list.size());
+    	assertEquals("Second", list.removeFirst());
+    	assertEquals(4, list.size());
+    	assertEquals("Third", list.removeFirst());
+    	assertEquals(3, list.size());
+    	assertEquals("Fourth", list.removeFirst());
+    	assertEquals(2, list.size());
+    	assertEquals("Fifth", list.removeFirst());
+    	assertEquals(1, list.size());
+    	
+    	list.addLast("Extra");
+    	assertEquals("Sixth", list.removeFirst());
+    	assertEquals(1, list.size());
+    	list.addFirst("ExtraExtra");
+    	assertEquals("ExtraExtra", list.removeFirst());
+    	assertEquals(1, list.size());
     }
 
     /**
@@ -158,7 +299,26 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testRemoveLast() {
-        //TODO: complete this test case
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.removeLast());
+    	
+    	list.addLast("First");
+    	list.addLast("Second");
+    	list.addLast("Third");
+    	list.addLast("Fourth");
+    	list.addLast("Fifth");
+    	list.addLast("Sixth");
+    	
+    	assertEquals("Sixth", list.removeLast());
+    	assertEquals("Fifth", list.removeLast());
+    	assertEquals("Fourth", list.removeLast());
+    	assertEquals("Third", list.removeLast());
+    	assertEquals("Second", list.removeLast());
+    	list.addLast("Extra");
+    	assertEquals("Extra", list.removeLast());
+    	list.addFirst("ExtraExtra");
+    	assertEquals("First", list.removeLast());
+    	
+    	
     }
 
     /**
@@ -166,6 +326,28 @@ public class ArrayBasedListTest {
      */
     @Test
     public void testSet() {
-        //TODO: complete this test case
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.set(0, "FailedFirst"));
+    	
+    	list.addLast("First");
+    	list.addLast("Second");
+    	list.addLast("Third");
+    	list.addLast("Fourth");
+    	list.addLast("Fifth");
+    	list.addLast("Sixth");
+    	
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.set(6, "FailedFirst"));
+    	
+    	list.set(3, "BetterFourth");
+    	
+    	assertEquals("BetterFourth", list.get(3));
+    	assertThrows(IndexOutOfBoundsException.class, () -> list.set(6, "FailedFirst"));
+    	
+    	list.set(0, "MuchBetterFirst");
+    	
+    	assertEquals("MuchBetterFirst", list.get(0));
+    	
+    	list.set(5, "MediocreSixth");
+    	
+    	assertEquals("MediocreSixth", list.get(5));
     }
 }
