@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
  * behaviors.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the list
  */
@@ -36,6 +37,11 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
         size = 0;
     }
 
+    /**
+     * Adds an element to the list at the specified index
+     * @param index the index in the list where the element should be added
+     * @param element the element to be added to the list
+     */
 	@Override
 	public void add(int index, E element) {
 		checkIndexForAdd(index);
@@ -53,6 +59,11 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 		}
 	}
 
+	/**
+	 * returns the element at the index
+	 * @param index the place in the list at which to retrieve the element
+	 * @return E the element in the list to be retrieved
+	 */
 	@Override
 	public E get(int index) {
 		checkIndex(index);
@@ -63,6 +74,11 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 		return current.getElement();
 	}
 
+	/**
+	 * Removes the element at the index from the list and returns it
+	 * @param index the location of the element in the list that will be removed
+	 * @return the element that was removed from the list
+	 */
 	@Override
 	public E remove(int index) {
 		checkIndex(index);
@@ -79,6 +95,12 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 		return oldData;
 	}
 
+	/**
+	 * replaces the element at the specified index with the parameterized element
+	 * @param index the index at which to set the element
+	 * @param element the element that the index in the list will be set to
+	 * @return the element that was replaced with the parameter element
+	 */
 	@Override
 	public E set(int index, E element) {
 		checkIndex(index);
@@ -91,11 +113,14 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 		return oldData;
 	}
 
+	/**
+	 * returns the size of the list
+	 * @return the size of the list
+	 */
 	@Override
 	public int size() {
 		return size;
 	}
-	
     /**
      * {@inheritDoc} For a singly-linked list, this behavior has O(1) worst-case
      * runtime.
@@ -127,6 +152,10 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
         }
     }
 
+    /**
+     * returns a new iterator that starts at the beginning of the list
+     * @return the new iterator for this list
+     */
 	@Override
 	public Iterator<E> iterator() {
 		return new ElementIterator();
@@ -143,11 +172,11 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 	     */
 	    private LinkedListNode<E> previous;
 	    
-	    /**
-	     * Keep track of whether it's ok to remove an element (based on whether
-	     * next() has been called immediately before remove())
-	     */
-	    private boolean removeOK;
+//	    /**
+//	     * Keep track of whether it's ok to remove an element (based on whether
+//	     * next() has been called immediately before remove())
+//	     */
+//	    private boolean removeOK;
 
 	    /**
 	     * Construct a new element iterator where the cursor is initialized 
@@ -156,30 +185,39 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 	    public ElementIterator() {
 	        previous = front;
 	        current = previous.next;
-	        removeOK = false;
+//	        removeOK = false;
 	    }
 
+	    /**
+	     * returns the status of whether or not the iterator has a next element
+	     * @return true if the iterator has a next element, false if not
+	     */
 	    @Override
 	    public boolean hasNext() {
-	        if (previous.next != null) {
-	        	return true;
-	        }
-	        return false;
+	        return previous.next != null;
 	    }
 
+	    /**
+	     * returns the next element in the iterator.
+	     * @return the next element in the iterator
+	     */
 	    @Override
 	    public E next() {
 	        if (!hasNext()) {
 	        	throw new NoSuchElementException();
 	        }
 	        current = previous.next;
-	        removeOK = true;
+//	        removeOK = true;
 	        previous.next = current;
 	        previous = current;
 	        //current = previous.next;
 	        return previous.getElement();
 	    }
-	     
+	    
+	    /**
+	     * remove is not supported by this implementation of Iterator
+	     * @throws UnsupportedOperationException because remove is not supported
+	     */
 	    @Override    
 	    public void remove() {
 	        throw new UnsupportedOperationException(
@@ -187,29 +225,60 @@ public class SinglyLinkedList<E> extends AbstractList<E>{
 	    }
 	}
     
+	/**
+	 * This c lass contains nodes that are apart of a LinkedList. 
+	 * These are singly linked nodes, only containing their data and a reference to the next node after this one
+	 * @author Jeremiah Knizley
+	 *
+	 * @param <E> the type of data to be stored in the nodes
+	 */
 	private static class LinkedListNode<E> {
         /** The data stored in the node */
         private E data;
         /** the next node after this one */
         private LinkedListNode<E> next;
         
+        /**
+         * creates a new LinkedListNode 
+         * @param data  the data to be stored in the node
+         */
         public LinkedListNode(E data) {
         	this.data = data;
         }
+        /**
+         * creates a new LinkedListNode using data and a next reference
+         * @param data the data in the node
+         * @param next the next node after this one
+         */
         public LinkedListNode(E data, LinkedListNode<E> next) {
         	this.data = data;
         	this.next = next;
         }
-        
+        /**
+         * returns the next node after this one
+         * @return the node after this one
+         */
         public LinkedListNode<E> getNext() {
         	return next;
         }
+        /**
+         * sets the next node to the parameter
+         * @param next the node to be set as next
+         */
         public void setNext(LinkedListNode<E> next) {
         	this.next = next;
         }
+        /**
+         * sets the data of this node to element
+         * @param element the new data for this node
+         */
         public void setElement(E element) {
         	this.data = element;
         }
+        /**
+         * returns the data stored in this node
+         * @return the data stored in this node
+         */
         public E getElement() {
         	return data;
         }

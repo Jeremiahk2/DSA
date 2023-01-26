@@ -7,16 +7,25 @@ package edu.ncsu.csc316.dsa.list;
  * abstract data type.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the list
  */
 public abstract class AbstractList<E> implements List<E> {
 
+	/**
+	 * adds the element to the front of the list
+	 * @param element the element to be added to the beginning of the list
+	 */
     @Override
     public void addFirst(E element) {
         add(0, element);
     }
 
+    /**
+     * adds the element to the end of the list
+     * @param element the element be added to the end of the list
+     */
     @Override
     public void addLast(E element) {
         add(size(), element);
@@ -29,6 +38,7 @@ public abstract class AbstractList<E> implements List<E> {
      * 
      * @param index the index for which to check whether it is valid/legal in the
      *              current list or not
+     * @throws IndexOutOfBoundsException if the index is not valid for the current size of the list
      */
     protected void checkIndex(int index) {
         if (index < 0 || index >= size()) {
@@ -43,6 +53,7 @@ public abstract class AbstractList<E> implements List<E> {
      * 
      * @param index the index for which to check whether it is valid/legal in the
      *              current list or not
+     * @throws IndexOutOfBoundsException if the index is not valid for the current size of the list
      */
     protected void checkIndexForAdd(int index) {
         if (index < 0 || index > size()) {
@@ -50,26 +61,46 @@ public abstract class AbstractList<E> implements List<E> {
         }
     }
 
+    /**
+     * returns the first element in the list
+     * @return the first element in the list
+     */
     @Override
     public E first() {
         return get(0);
     }
 
+    /**
+     * returns whether or not the list is empty or not
+     * @return true if the list is empty, false if not
+     */
     @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    /**
+     * returns the last element in the list
+     * @return the last element in the list
+     */
     @Override
     public E last() {
         return get(size() - 1);
     }
 
+    /**
+     * removes the first element in the list
+     * @return the element that was removed from the list
+     */
     @Override
     public E removeFirst() {
         return remove(0);
     }
 
+    /**
+     * removes the element at the end of the list
+     * @return the element that was removed from the list
+     */
     @Override
     public E removeLast() {
         return remove(size() - 1);

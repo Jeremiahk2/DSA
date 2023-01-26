@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
  * global field to allow for O(1) size() and isEmpty() behaviors.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the list
  */
@@ -48,13 +49,9 @@ public class ArrayBasedList<E> extends AbstractList<E> {
         data = (E[]) (new Object[capacity]);
         size = 0;
     }
-
 	@Override
 	public void add(int index, E element) {
 		checkIndexForAdd(index);
-		if (element == null) {
-			throw new NullPointerException();
-		}
 		ensureCapacity(size() + 1);
 		for (int i = size; i > index; i--) {
 			data[i] = data[i - 1];
@@ -62,7 +59,7 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 		data[index] = element;
 		size++;
 	}
-
+	
 	@Override
 	public E get(int index) {
 		checkIndex(index);
@@ -79,7 +76,6 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 		size--;
 		return element;
 	}
-
 	@Override
 	public E set(int index, E element) {
 		checkIndex(index);
@@ -93,11 +89,20 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 		return size;
 	}
 
+	/**
+	 * returns a new iterator for this list
+	 * @return a new iterator for this list
+	 */
 	@Override
 	public Iterator<E> iterator() {
 		return new ElementIterator();
 	}
 	
+	/**
+	 * A class for a new iterator for this list. Designed to iterate through the list and remove elements
+	 * @author Jeremiah Knizley
+	 *
+	 */
 	private class ElementIterator implements Iterator<E> {
 		/** the current position in the list (The index of the element that will be returned by next */
 	    private int position;
@@ -112,15 +117,22 @@ public class ArrayBasedList<E> extends AbstractList<E> {
 	        position = 0;
 	        removeOK = false;
 	    }
-
+	    
+	    /**
+	     * returns the status of whether or not there are more elements that can be
+	     * traversed through with next
+	     * @return true if there are more elements, false if not
+	     */
 	    @Override
 	    public boolean hasNext() {
-	        if (size > position) {
-	        	return true;
-	        }
-	        return false;
+	        return size > position;
 	    }
 
+	    /**
+	     * progresses through the next element in the list, returning it.
+	     * @return the next element in the list
+	     * @throws NoSuchElementException if hasNext is false
+	     */
 	    @Override
 	    public E next() {
 	    	if (!hasNext()) {
@@ -132,7 +144,12 @@ public class ArrayBasedList<E> extends AbstractList<E> {
     		return data[index];
 	    	
 	    }
-	        
+	    
+	    /**
+	     * removes the element that was last returned by next() from the list
+	     * @throws IllegalStateException if this is the second consecutive call to remove()
+	     * or if next() has not been called yet
+	     */
 	    @Override
 	    public void remove() {
 	        if (removeOK) {
@@ -158,7 +175,7 @@ public class ArrayBasedList<E> extends AbstractList<E> {
     private void ensureCapacity(int minCapacity) {
         int oldCapacity = data.length;
         if (minCapacity > oldCapacity) {
-            int newCapacity = (oldCapacity * 2) + 1;
+            int newCapacity = oldCapacity * 2 + 1;
             if (newCapacity < minCapacity) {
                 newCapacity = minCapacity;
             }
