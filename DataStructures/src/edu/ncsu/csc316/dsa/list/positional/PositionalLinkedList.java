@@ -1,7 +1,7 @@
 package edu.ncsu.csc316.dsa.list.positional;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
+//import java.util.NoSuchElementException;
 
 import edu.ncsu.csc316.dsa.Position;
 
@@ -26,40 +26,39 @@ import edu.ncsu.csc316.dsa.Position;
  */
 public class PositionalLinkedList<E> implements PositionalList<E> {
 
-    /** A dummy/sentinel node representing at the front of the list **/
-    private PositionalNode<E> front;
+	/** A dummy/sentinel node representing at the front of the list **/
+	private PositionalNode<E> front;
 
-    /** A dummy/sentinel node representing at the end/tail of the list **/
-    private PositionalNode<E> tail;
+	/** A dummy/sentinel node representing at the end/tail of the list **/
+	private PositionalNode<E> tail;
 
-    /** The number of elements in the list **/
-    private int size;
+	/** The number of elements in the list **/
+	private int size;
 
-    /**
-     * Constructs an empty positional linked list
-     */
-    public PositionalLinkedList() {
-        front = new PositionalNode<E>(null);
-        tail = new PositionalNode<E>(null, null, front);
-        front.setNext(tail);
-        size = 0;
-    }
+	/**
+	 * Constructs an empty positional linked list
+	 */
+	public PositionalLinkedList() {
+		front = new PositionalNode<E>(null);
+		tail = new PositionalNode<E>(null, null, front);
+		front.setNext(tail);
+		size = 0;
+	}
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ElementIterator();
 	}
-	
+
 	private Position<E> addBetween(E element, PositionalNode<E> next, PositionalNode<E> prev) {
-        PositionalNode<E> newNode = new PositionalNode<>(element);
-        newNode.setNext(next);
-        newNode.setPrevious(prev);
-        prev.setNext(newNode);
-        next.setPrevious(newNode);
-        size++;
+		PositionalNode<E> newNode = new PositionalNode<>(element);
+		newNode.setNext(next);
+		newNode.setPrevious(prev);
+		prev.setNext(newNode);
+		next.setPrevious(newNode);
+		size++;
 		return newNode;
-    }
+	}
 
 	@Override
 	public Position<E> addAfter(Position<E> p, E element) {
@@ -123,7 +122,7 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 	@Override
 	public Iterable<Position<E>> positions() {
 		// TODO Auto-generated method stub
-		return null;
+		return new PositionIterable();
 	}
 
 	@Override
@@ -148,71 +147,143 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 	public int size() {
 		return size;
 	}
-	
+
 	/**
-     * Safely casts a Position, p, to be a PositionalNode.
-     * 
-     * @param p the position to cast to a PositionalNode
-     * @return a reference to the PositionalNode
-     * @throws IllegalArgumentException if p is null, or if p is not a valid
-     *                                  PositionalNode
-     */
-    private PositionalNode<E> validate(Position<E> p) {
-        if (p instanceof PositionalNode) {
-            return (PositionalNode<E>) p;
-        }
-        throw new IllegalArgumentException("Position is not a valid positional list node.");
-    }
-	
+	 * Safely casts a Position, p, to be a PositionalNode.
+	 * 
+	 * @param p the position to cast to a PositionalNode
+	 * @return a reference to the PositionalNode
+	 * @throws IllegalArgumentException if p is null, or if p is not a valid
+	 *                                  PositionalNode
+	 */
+	private PositionalNode<E> validate(Position<E> p) {
+		if (p instanceof PositionalNode) {
+			return (PositionalNode<E>) p;
+		}
+		throw new IllegalArgumentException("Position is not a valid positional list node.");
+	}
+
 	private static class PositionalNode<E> implements Position<E> {
 
 		/** the data in the node */
-        private E element;
-        /** the next node after this one */
-        private PositionalNode<E> next;
-        /** the previous node before this one */
-        private PositionalNode<E> previous;
+		private E element;
+		/** the next node after this one */
+		private PositionalNode<E> next;
+		/** the previous node before this one */
+		private PositionalNode<E> previous;
 
-        public PositionalNode(E value) {
-            this(value, null);
-        }
+		public PositionalNode(E value) {
+			this(value, null);
+		}
 
-        public PositionalNode(E value, PositionalNode<E> next) {
-            this(value, next, null);
-        }
+		public PositionalNode(E value, PositionalNode<E> next) {
+			this(value, next, null);
+		}
 
-        public PositionalNode(E value, PositionalNode<E> next, PositionalNode<E> prev) {
-            setElement(value);
-            setNext(next);
-            setPrevious(prev);
-        }
+		public PositionalNode(E value, PositionalNode<E> next, PositionalNode<E> prev) {
+			setElement(value);
+			setNext(next);
+			setPrevious(prev);
+		}
 
-        public void setPrevious(PositionalNode<E> prev) {
-            previous = prev;
-        }
+		public void setPrevious(PositionalNode<E> prev) {
+			previous = prev;
+		}
 
-        public PositionalNode<E> getPrevious() {
-            return previous;
-        }
-        
-        public void setNext(PositionalNode<E> next) {
-            this.next = next;
-        }
+		public PositionalNode<E> getPrevious() {
+			return previous;
+		}
 
-        public PositionalNode<E> getNext() {
-            return next;
-        }
+		public void setNext(PositionalNode<E> next) {
+			this.next = next;
+		}
 
-        @Override
-        public E getElement() {
-            return element;
-        }
-        
-        public void setElement(E element) {
-            this.element = element;
-        }
-    }
-	
-	
+		public PositionalNode<E> getNext() {
+			return next;
+		}
+
+		@Override
+		public E getElement() {
+			return element;
+		}
+
+		public void setElement(E element) {
+			this.element = element;
+		}
+	}
+
+	private class PositionIterator implements Iterator<Position<E>> {
+
+		/**
+		 * The current Position in the list (the one that will be returned on a call to next())
+		 */
+		private Position<E> current;
+		/**
+		 * controls whether or not the remove operation can be performed. Set to true on a call to next, and false on a call to remove
+		 */
+		private boolean removeOK;
+
+		/**
+		 * creates a PositionIterator at the beginning of the list
+		 */
+		public PositionIterator() {
+			current = front.next;
+			removeOK = false;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		@Override
+		public Position<E> next() {
+			Position<E> old = current;
+			current = after(current);
+			removeOK = true;
+			return old;
+		}
+
+		@Override
+		public void remove() {
+			if (!removeOK) {
+				throw new IllegalStateException();
+			}
+			PositionalLinkedList.this.remove(before(current));
+		}
+	}
+
+	private class ElementIterator implements Iterator<E> {
+		/** a position iterator that will be paired with this element iterator */
+		private Iterator<Position<E>> it;
+
+		public ElementIterator() {
+			it = new PositionIterator();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return it.hasNext();
+		}
+
+		@Override
+		public E next() {
+			return it.next().getElement();
+		}
+
+		@Override
+		public void remove() {
+			it.remove();
+		}
+	}
+	 private class PositionIterable implements Iterable<Position<E>> {
+	        
+	        @Override
+	        public Iterator<Position<E>> iterator() {
+	            return new PositionIterator();
+	        }
+	    }
+
+
 
 }

@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
  *
  * @param <E> the type of elements stored in the list
  */
-public class SinglyLinkedList<E> extends AbstractList<E>{
+public class SinglyLinkedList<E> extends AbstractList<E> {
 
     /** A reference to the dummy/sentinel node at the front of the list **/
     private LinkedListNode<E> front;

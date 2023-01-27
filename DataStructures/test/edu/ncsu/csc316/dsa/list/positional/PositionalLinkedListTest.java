@@ -3,7 +3,7 @@ package edu.ncsu.csc316.dsa.list.positional;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
+//import java.util.NoSuchElementException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -228,8 +228,11 @@ public class PositionalLinkedListTest {
      */     
     @Test
     public void testIterator() {
-        //TODO: complete this test case
-        // Use your ArrayBasedList and SinglyLinkedList test cases as a guide
+    	list.addLast("One");
+    	list.addLast("Two");
+    	Iterator<String> it = list.iterator();
+    	assertEquals("One", it.next());
+    	
     }
     
     /**
@@ -250,7 +253,6 @@ public class PositionalLinkedListTest {
         assertEquals(second, it.next());
         assertEquals(third, it.next());
         
-        //TODO: complete this test case
     }
 
 }
