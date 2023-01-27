@@ -19,29 +19,29 @@ import java.util.NoSuchElementException;
  */
 public class SinglyLinkedList<E> extends AbstractList<E> {
 
-    /** A reference to the dummy/sentinel node at the front of the list **/
-    private LinkedListNode<E> front;
-    
-    /** A reference to the last/final node in the list **/
-    private LinkedListNode<E> tail;
-    
-    /** The number of elements stored in the list **/
-    private int size;
-        
-    /**
-     * Constructs an empty singly-linked list
-     */     
-    public SinglyLinkedList() {
-        front = new LinkedListNode<E>(null);
-        tail = null;
-        size = 0;
-    }
+	/** A reference to the dummy/sentinel node at the front of the list **/
+	private LinkedListNode<E> front;
 
-    /**
-     * Adds an element to the list at the specified index
-     * @param index the index in the list where the element should be added
-     * @param element the element to be added to the list
-     */
+	/** A reference to the last/final node in the list **/
+	private LinkedListNode<E> tail;
+
+	/** The number of elements stored in the list **/
+	private int size;
+
+	/**
+	 * Constructs an empty singly-linked list
+	 */     
+	public SinglyLinkedList() {
+		front = new LinkedListNode<E>(null);
+		tail = null;
+		size = 0;
+	}
+
+	/**
+	 * Adds an element to the list at the specified index
+	 * @param index the index in the list where the element should be added
+	 * @param element the element to be added to the list
+	 */
 	@Override
 	public void add(int index, E element) {
 		checkIndexForAdd(index);
@@ -121,167 +121,158 @@ public class SinglyLinkedList<E> extends AbstractList<E> {
 	public int size() {
 		return size;
 	}
-    /**
-     * {@inheritDoc} For a singly-linked list, this behavior has O(1) worst-case
-     * runtime.
-     */
-    @Override
-    public E last() {
-        if (isEmpty()) {
-            throw new IndexOutOfBoundsException("The list is empty");
-        }
-        return tail.getElement();
-    }
+	/**
+	 * {@inheritDoc} For a singly-linked list, this behavior has O(1) worst-case
+	 * runtime.
+	 */
+	@Override
+	public E last() {
+		if (isEmpty()) {
+			throw new IndexOutOfBoundsException("The list is empty");
+		}
+		return tail.getElement();
+	}
 
-    /**
-     * {@inheritDoc}
-     * For this singly-linked list, addLast(element) behavior has O(1) worst-case runtime.
-     */    
-    @Override
-    public void addLast(E element) {
-        LinkedListNode<E> lastNode = new LinkedListNode<E>(element);
-        if (isEmpty()) {
-        	front.setNext(lastNode);
-        	tail = lastNode;
-        	size++;
-        }
-        else {
-        	tail.setNext(lastNode);
-            tail = tail.getNext();
-            size++;
-        }
-    }
+	/**
+	 * {@inheritDoc}
+	 * For this singly-linked list, addLast(element) behavior has O(1) worst-case runtime.
+	 */    
+	@Override
+	public void addLast(E element) {
+		LinkedListNode<E> lastNode = new LinkedListNode<E>(element);
+		if (isEmpty()) {
+			front.setNext(lastNode);
+			tail = lastNode;
+			size++;
+		}
+		else {
+			tail.setNext(lastNode);
+			tail = tail.getNext();
+			size++;
+		}
+	}
 
-    /**
-     * returns a new iterator that starts at the beginning of the list
-     * @return the new iterator for this list
-     */
+	/**
+	 * returns a new iterator that starts at the beginning of the list
+	 * @return the new iterator for this list
+	 */
 	@Override
 	public Iterator<E> iterator() {
 		return new ElementIterator();
 	}
-	
+
 	private class ElementIterator implements Iterator<E> {
-	    /**
-	     * Keep track of the next node that will be processed
-	     */
-	    private LinkedListNode<E> current;
-	    
-	    /** 
-	     * Keep track of the node that was processed on the last call to 'next'
-	     */
-	    private LinkedListNode<E> previous;
-	    
-//	    /**
-//	     * Keep track of whether it's ok to remove an element (based on whether
-//	     * next() has been called immediately before remove())
-//	     */
-//	    private boolean removeOK;
+		/**
+		 * Keep track of the next node that will be processed
+		 */
+		private LinkedListNode<E> current;
 
-	    /**
-	     * Construct a new element iterator where the cursor is initialized 
-	     * to the beginning of the list.
-	     */
-	    public ElementIterator() {
-	        previous = front;
-	        current = previous.next;
-//	        removeOK = false;
-	    }
+		/** 
+		 * Keep track of the node that was processed on the last call to 'next'
+		 */
+		private LinkedListNode<E> previous;
 
-	    /**
-	     * returns the status of whether or not the iterator has a next element
-	     * @return true if the iterator has a next element, false if not
-	     */
-	    @Override
-	    public boolean hasNext() {
-	        return previous.next != null;
-	    }
+		/**
+		 * Construct a new element iterator where the cursor is initialized 
+		 * to the beginning of the list.
+		 */
+		public ElementIterator() {
+			previous = front;
+			current = previous.next;
+		}
 
-	    /**
-	     * returns the next element in the iterator.
-	     * @return the next element in the iterator
-	     */
-	    @Override
-	    public E next() {
-	        if (!hasNext()) {
-	        	throw new NoSuchElementException();
-	        }
-	        current = previous.next;
-//	        removeOK = true;
-	        previous.next = current;
-	        previous = current;
-	        //current = previous.next;
-	        return previous.getElement();
-	    }
-	    
-	    /**
-	     * remove is not supported by this implementation of Iterator
-	     * @throws UnsupportedOperationException because remove is not supported
-	     */
-	    @Override    
-	    public void remove() {
-	        throw new UnsupportedOperationException(
-	            "This SinglyLinkedList implementation does not currently support removal of elements when using the iterator.");
-	    }
+		/**
+		 * returns the status of whether or not the iterator has a next element
+		 * @return true if the iterator has a next element, false if not
+		 */
+		@Override
+		public boolean hasNext() {
+			return previous.next != null;
+		}
+
+		/**
+		 * returns the next element in the iterator.
+		 * @return the next element in the iterator
+		 */
+		@Override
+		public E next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			current = previous.next;
+			previous.next = current;
+			previous = current;
+			return previous.getElement();
+		}
+
+		/**
+		 * remove is not supported by this implementation of Iterator
+		 * @throws UnsupportedOperationException because remove is not supported
+		 */
+		@Override    
+		public void remove() {
+			throw new UnsupportedOperationException(
+					"This SinglyLinkedList implementation does not currently support removal of elements when using the iterator.");
+		}
 	}
-    
+
 	/**
-	 * This c lass contains nodes that are apart of a LinkedList. 
+	 * This class contains nodes that are apart of a LinkedList. 
 	 * These are singly linked nodes, only containing their data and a reference to the next node after this one
 	 * @author Jeremiah Knizley
 	 *
 	 * @param <E> the type of data to be stored in the nodes
 	 */
 	private static class LinkedListNode<E> {
-        /** The data stored in the node */
-        private E data;
-        /** the next node after this one */
-        private LinkedListNode<E> next;
-        
-        /**
-         * creates a new LinkedListNode 
-         * @param data  the data to be stored in the node
-         */
-        public LinkedListNode(E data) {
-        	this.data = data;
-        }
-        /**
-         * creates a new LinkedListNode using data and a next reference
-         * @param data the data in the node
-         * @param next the next node after this one
-         */
-        public LinkedListNode(E data, LinkedListNode<E> next) {
-        	this.data = data;
-        	this.next = next;
-        }
-        /**
-         * returns the next node after this one
-         * @return the node after this one
-         */
-        public LinkedListNode<E> getNext() {
-        	return next;
-        }
-        /**
-         * sets the next node to the parameter
-         * @param next the node to be set as next
-         */
-        public void setNext(LinkedListNode<E> next) {
-        	this.next = next;
-        }
-        /**
-         * sets the data of this node to element
-         * @param element the new data for this node
-         */
-        public void setElement(E element) {
-        	this.data = element;
-        }
-        /**
-         * returns the data stored in this node
-         * @return the data stored in this node
-         */
-        public E getElement() {
-        	return data;
-        }
-    }
-    
+		/** The data stored in the node */
+		private E data;
+		/** the next node after this one */
+		private LinkedListNode<E> next;
+
+		/**
+		 * creates a new LinkedListNode 
+		 * @param data  the data to be stored in the node
+		 */
+		public LinkedListNode(E data) {
+			this.data = data;
+		}
+		/**
+		 * creates a new LinkedListNode using data and a next reference
+		 * @param data the data in the node
+		 * @param next the next node after this one
+		 */
+		public LinkedListNode(E data, LinkedListNode<E> next) {
+			this.data = data;
+			this.next = next;
+		}
+		/**
+		 * returns the next node after this one
+		 * @return the node after this one
+		 */
+		public LinkedListNode<E> getNext() {
+			return next;
+		}
+		/**
+		 * sets the next node to the parameter
+		 * @param next the node to be set as next
+		 */
+		public void setNext(LinkedListNode<E> next) {
+			this.next = next;
+		}
+		/**
+		 * sets the data of this node to element
+		 * @param element the new data for this node
+		 */
+		public void setElement(E element) {
+			this.data = element;
+		}
+		/**
+		 * returns the data stored in this node
+		 * @return the data stored in this node
+		 */
+		public E getElement() {
+			return data;
+		}
+	}
+
 }

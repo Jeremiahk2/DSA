@@ -51,6 +51,13 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 		return new ElementIterator();
 	}
 
+	/**
+	 * Adds the element between next and prev
+	 * @param element the element to be added
+	 * @param next the next element after the element to be added
+	 * @param prev the previous element before the element to be added
+	 * @return the position of the newly added element
+	 */
 	private Position<E> addBetween(E element, PositionalNode<E> next, PositionalNode<E> prev) {
 		PositionalNode<E> newNode = new PositionalNode<>(element);
 		newNode.setNext(next);
@@ -122,7 +129,6 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 
 	@Override
 	public Iterable<Position<E>> positions() {
-		// TODO Auto-generated method stub
 		return new PositionIterable();
 	}
 
@@ -164,6 +170,13 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 		throw new IllegalArgumentException("Position is not a valid positional list node.");
 	}
 
+	/**
+	 * PositionalNode are nodes that contain data, a reference to the next element after this one,
+	 * and the previous element before this one. Used for Position based lists
+	 * @author Jeremiah Knizley
+	 *
+	 * @param <E> the type of data to be stored in the list
+	 */
 	private static class PositionalNode<E> implements Position<E> {
 
 		/** the data in the node */
@@ -173,32 +186,63 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 		/** the previous node before this one */
 		private PositionalNode<E> previous;
 
+		/**
+		 * Constructor for PositionalNodes. Creates them with value as the element. next and previous are set to null
+		 * @param value the element to be stored in then ode
+		 */
 		public PositionalNode(E value) {
 			this(value, null);
 		}
 
+		/**
+		 * Additional constructor for PositionalNodes. Creates them with value as the element, next is set to next, and previous is set to null.
+		 * @param value the value to be stored in element
+		 * @param next the next position to be stored in next
+		 */
 		public PositionalNode(E value, PositionalNode<E> next) {
 			this(value, next, null);
 		}
 
+		/**
+		 * Additional constructor for PositionalNodes. Creates them with value as the element, next is set to next, and previous is set to null.
+		 * @param value the value to be stored in element
+		 * @param next the next position to be stored in next
+		 * @param prev the previous position to be stored in previous
+		 */
 		public PositionalNode(E value, PositionalNode<E> next, PositionalNode<E> prev) {
 			setElement(value);
 			setNext(next);
 			setPrevious(prev);
 		}
 
+		/**
+		 * sets previous to prev
+		 * @param prev the new position that is will be set to previous
+		 */
 		public void setPrevious(PositionalNode<E> prev) {
 			previous = prev;
 		}
 
+		/**
+		 * returns the previous element
+		 * @return the previous element
+		 */
 		public PositionalNode<E> getPrevious() {
 			return previous;
 		}
 
+		/**
+		 * sets the next variable to a new node
+		 * @param next the position to be set as next
+		 */
 		public void setNext(PositionalNode<E> next) {
 			this.next = next;
 		}
 
+		/**
+		 * returns the next positional node after this one
+		 * @return the next positional node after this one
+		 */
 		public PositionalNode<E> getNext() {
 			return next;
 		}
@@ -208,11 +252,20 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 			return element;
 		}
 
+		/**
+		 * sets the element with the parameter element
+		 * @param element the element to be set as the new data in the node
+		 */
 		public void setElement(E element) {
 			this.element = element;
 		}
 	}
 
+	/**
+	 * An iterator that iterates through and returns Positions
+	 * @author Jeremiah Knizley
+	 *
+	 */
 	private class PositionIterator implements Iterator<Position<E>> {
 
 		/**
@@ -267,10 +320,19 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 		}
 	}
 
+	/**
+	 * An iterator that iterates through elements rather than positions/nodes. 
+	 * @author Jeremiah Knizley
+	 *
+	 */
 	private class ElementIterator implements Iterator<E> {
 		/** a position iterator that will be paired with this element iterator */
 		private Iterator<Position<E>> it;
 
+		/**
+		 * creates a new ElementIterator (initializes "it" field) 
+		 * The position iterator will be delegated to in order to retrieve elements.
+		 */
 		public ElementIterator() {
 			it = new PositionIterator();
 		}
@@ -290,13 +352,18 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 			it.remove();
 		}
 	}
-	 private class PositionIterable implements Iterable<Position<E>> {
-	        
-	        @Override
-	        public Iterator<Position<E>> iterator() {
-	            return new PositionIterator();
-	        }
-	    }
+	/**
+	 * Allows for the list to be iterable, and returns a new PositionIterator
+	 * @author Jeremiah Knizley
+	 *
+	 */
+	private class PositionIterable implements Iterable<Position<E>> {
+
+		@Override
+		public Iterator<Position<E>> iterator() {
+			return new PositionIterator();
+		}
+	}
 
 
 
