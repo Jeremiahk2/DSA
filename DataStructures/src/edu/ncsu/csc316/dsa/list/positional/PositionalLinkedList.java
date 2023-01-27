@@ -2,6 +2,7 @@ package edu.ncsu.csc316.dsa.list.positional;
 
 import java.util.Iterator;
 //import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
 import edu.ncsu.csc316.dsa.Position;
 
@@ -233,11 +234,17 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 
 		@Override
 		public boolean hasNext() {
+			if (isEmpty()) {
+				return false;
+			}
 			return current != null;
 		}
 
 		@Override
 		public Position<E> next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
 			Position<E> old = current;
 			current = after(current);
 			removeOK = true;
@@ -249,7 +256,14 @@ public class PositionalLinkedList<E> implements PositionalList<E> {
 			if (!removeOK) {
 				throw new IllegalStateException();
 			}
-			PositionalLinkedList.this.remove(before(current));
+			if (current == null) {
+				PositionalLinkedList.this.remove(tail.previous);
+				removeOK = false;
+			}
+			else {
+				PositionalLinkedList.this.remove(before(current));	
+				removeOK = false;
+			}
 		}
 	}
 

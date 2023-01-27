@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 //import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -228,11 +229,83 @@ public class PositionalLinkedListTest {
      */     
     @Test
     public void testIterator() {
-    	list.addLast("One");
-    	list.addLast("Two");
-    	Iterator<String> it = list.iterator();
-    	assertEquals("One", it.next());
-    	
+    	// Start with an empty list
+        assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+        
+        // Create an iterator for the empty list
+        Iterator<String> it = list.iterator();
+        
+        // Try different operations to make sure they work
+        // as expected for an empty list (at this point)
+        try{
+            it.remove();
+            fail("An IllegalStateException should have been thrown");           
+        } catch(Exception e) {
+            assertTrue(e instanceof IllegalStateException);
+        }
+        assertFalse(it.hasNext());
+
+        // Now add an element
+        list.addLast("one");
+        
+        // Use accessor methods to check that the list is correct
+        assertEquals(1, list.size());
+        assertFalse(list.isEmpty());
+        //assertEquals("one", list.get(0));
+        
+        // Create an iterator for the list that has 1 element
+        it = list.iterator();
+        
+        // Try different iterator operations to make sure they work
+        // as expected for a list that contains 1 element (at this point)
+        assertTrue(it.hasNext());
+        assertEquals("one", it.next());
+        assertFalse(it.hasNext());
+        try{
+            it.next();
+            fail("A NoSuchElementException should have been thrown");           
+        } catch(Exception e) {
+            assertTrue(e instanceof NoSuchElementException);
+        }
+
+        it.remove();
+        assertEquals(0, list.size());
+        assertTrue(list.isEmpty());
+        //assertThrows(IndexOutOfBoundsException.class, () -> list.get(0));
+        try{
+            it.remove();
+            fail("An IllegalStateException should have been thrown");           
+        } catch(Exception e) {
+            assertTrue(e instanceof IllegalStateException);
+        }
+        
+//        list.addLast("NewOne");
+//        list.addLast("Two");
+//        list.addLast("Three");
+//        list.addLast("Four");
+//        assertEquals("NewOne", it.next());
+//        assertEquals("Two", it.next());
+//        assertEquals("Three", it.next());
+//        assertEquals("Four", it.next());
+//        try{
+//            it.remove();        
+//        } catch(Exception e) {
+//            fail("Remove should not throw an exception here");
+//        }
+//        try{
+//            it.remove();
+//            fail("An IllegalStateException should have been thrown");           
+//        } catch(Exception e) {
+//            assertTrue(e instanceof IllegalStateException);
+//        }
+//        assertFalse(it.hasNext());
+//        try{
+//            it.next();
+//            fail("A NoSuchElementException should have been thrown");           
+//        } catch(Exception e) {
+//            assertTrue(e instanceof NoSuchElementException);
+//        }
     }
     
     /**
