@@ -114,12 +114,7 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 		}
 		E rtnElement = data[front];
 		data[front] = null;
-		if (front + 1 >= data.length && size() != front + 1) {
-			front = 0;
-		}
-		else {
-			front = front + 1;
-		}
+		front = (front + 1) % data.length;
 		size--;
 		if (isEmpty()) {
 			front = 0; 
