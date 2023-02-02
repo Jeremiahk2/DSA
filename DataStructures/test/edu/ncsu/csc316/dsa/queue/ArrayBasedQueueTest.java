@@ -35,43 +35,64 @@ public class ArrayBasedQueueTest {
         assertTrue(queue.isEmpty());
         
         queue.enqueue("one");
+        
         assertEquals(1, queue.size());
         assertFalse(queue.isEmpty());
+        
         queue.enqueue("two");
+        
         assertEquals(2, queue.size());
+        
         queue.enqueue("three");
+        
         assertEquals(3, queue.size());
-        queue.enqueue("four");
-        assertEquals(4, queue.size());
-        queue.enqueue("five");
-        assertEquals(5, queue.size());
+        
         assertEquals("one", queue.dequeue());
-        assertEquals(4, queue.size());
-        assertEquals("two", queue.dequeue());
-        assertEquals(3, queue.size());
-        assertEquals("three", queue.dequeue());
+        
         assertEquals(2, queue.size());
+        
+        assertEquals("two", queue.dequeue());
+        
+        assertEquals(1, queue.size());
+        queue.enqueue("four");
+//        assertEquals(4, queue.size());
+//        assertEquals(5, queue.size());
+//        assertEquals("one", queue.dequeue());
+//        assertEquals(4, queue.size());
+//        assertEquals("two", queue.dequeue());
+//        assertEquals(3, queue.size());
+        assertEquals("three", queue.dequeue());
+        assertEquals(1, queue.size());
         //enqueue well past capacity to test wrapping around
         queue.enqueue("six");
-        assertEquals(3, queue.size());
+        assertEquals(2, queue.size());
         queue.enqueue("seven");
-        assertEquals(4, queue.size());
+        assertEquals(3, queue.size());
         queue.enqueue("eight");
-        assertEquals(5, queue.size());
+        assertEquals(4, queue.size());
         queue.enqueue("nine");
-        assertEquals(6, queue.size());
+        assertEquals(5, queue.size());
         queue.enqueue("ten");
-        assertEquals(7, queue.size());
+        assertEquals(6, queue.size());
         queue.enqueue("eleven");
-        assertEquals(8, queue.size());
+        assertEquals(7, queue.size());
         queue.enqueue("twelve");
-        assertEquals(9, queue.size());
+        assertEquals(8, queue.size());
         queue.enqueue("thirteen");
-        assertEquals(10, queue.size());
+        assertEquals(9, queue.size());
         assertEquals("four", queue.front());
         assertEquals("four", queue.dequeue());
         queue.enqueue("fourteen");
-        assertEquals("five", queue.dequeue());
+//        assertEquals("five", queue.dequeue());
+        assertEquals("six", queue.dequeue());
+        assertEquals("seven", queue.dequeue());
+        assertEquals("eight", queue.dequeue());
+        assertEquals("nine", queue.dequeue());
+        assertEquals("ten", queue.dequeue());
+        assertEquals("eleven", queue.dequeue());
+        assertEquals("twelve", queue.dequeue());
+        assertEquals("thirteen", queue.dequeue());
+        assertEquals("fourteen", queue.dequeue());
     }
     
     /**
@@ -97,6 +118,7 @@ public class ArrayBasedQueueTest {
         assertEquals("four", queue.dequeue());
         assertEquals("five", queue.dequeue());
         queue.enqueue("six");
+        assertEquals("six", queue.dequeue());
     }
     
     /**

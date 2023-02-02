@@ -104,12 +104,7 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 		}
 		data[rear] = element;
 		size++;
-		if (rear + 1 >= data.length && size() != rear + 1) {
-			rear = 0;
-		}
-		else {
-			rear = rear + 1;
-		}
+		rear = (rear + 1) % data.length;
 	}
 
 	@Override
