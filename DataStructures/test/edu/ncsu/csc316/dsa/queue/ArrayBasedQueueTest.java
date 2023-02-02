@@ -90,9 +90,13 @@ public class ArrayBasedQueueTest {
         assertEquals("one", queue.dequeue());
         queue.enqueue("two");
         queue.enqueue("three");
+        assertEquals("two", queue.dequeue());
         queue.enqueue("four");
-        
-
+        queue.enqueue("five");
+        assertEquals("three", queue.dequeue());
+        assertEquals("four", queue.dequeue());
+        assertEquals("five", queue.dequeue());
+        queue.enqueue("six");
     }
     
     /**
