@@ -37,7 +37,6 @@ public class ArrayBasedQueueTest {
         queue.enqueue("one");
         assertEquals(1, queue.size());
         assertFalse(queue.isEmpty());
-        
         queue.enqueue("two");
         assertEquals(2, queue.size());
         queue.enqueue("three");
@@ -69,6 +68,7 @@ public class ArrayBasedQueueTest {
         assertEquals(9, queue.size());
         queue.enqueue("thirteen");
         assertEquals(10, queue.size());
+        assertEquals("four", queue.front());
     }
     
     /**
@@ -86,13 +86,13 @@ public class ArrayBasedQueueTest {
         
 
     }
-//    
-//    /**
-//     * Test the output of the front() behavior, including expected exceptions
-//     */     
-//    @Test
-//    public void testFront() {
-//        
-//    }
+    
+    /**
+     * Test the output of the front() behavior, including expected exceptions
+     */     
+    @Test
+    public void testFront() {
+        
+    }
 
 }

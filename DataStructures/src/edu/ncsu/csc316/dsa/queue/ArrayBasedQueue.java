@@ -89,8 +89,10 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
             }
             //Put the first half of the list after font (excluding front) into the new array.
             for (int i = 0; i < front; i++) {
-            	newData[front + i] = data[i];
+            	newData[front + 1 + i] = data[i];
             }
+            front = 0;
+            rear = size();
             data = newData;
         }
     }
@@ -117,7 +119,12 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 		}
 		E rtnElement = data[front];
 		data[front] = null;
-		front = (front + 1) % data.length;
+		if (front + 1 >= data.length && size() != data.length) {
+			front = 0;
+		}
+		else {
+			front = front + 1;
+		}
 		size--;
 		return rtnElement;
 	}
