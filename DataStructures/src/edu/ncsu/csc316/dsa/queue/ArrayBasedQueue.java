@@ -126,6 +126,10 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
 			front = front + 1;
 		}
 		size--;
+		if (isEmpty()) {
+			front = 0; 
+			rear = 0;
+		}
 		return rtnElement;
 	}
 

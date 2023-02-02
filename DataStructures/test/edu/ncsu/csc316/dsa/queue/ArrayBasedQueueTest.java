@@ -69,6 +69,9 @@ public class ArrayBasedQueueTest {
         queue.enqueue("thirteen");
         assertEquals(10, queue.size());
         assertEquals("four", queue.front());
+        assertEquals("four", queue.dequeue());
+        queue.enqueue("fourteen");
+        assertEquals("five", queue.dequeue());
     }
     
     /**
@@ -82,7 +85,12 @@ public class ArrayBasedQueueTest {
             fail("NoSuchElementException should have been thrown.");        
         } catch (Exception e) {
             assertTrue(e instanceof NoSuchElementException);
-        }        
+        }
+        queue.enqueue("one");
+        assertEquals("one", queue.dequeue());
+        queue.enqueue("two");
+        queue.enqueue("three");
+        queue.enqueue("four");
         
 
     }
