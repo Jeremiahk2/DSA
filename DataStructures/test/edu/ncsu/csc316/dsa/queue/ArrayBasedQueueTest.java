@@ -15,6 +15,7 @@ import org.junit.Test;
  */
 public class ArrayBasedQueueTest {
 
+	/** queue used for testing purposes */
     private Queue<String> queue;
     
     /**
@@ -37,7 +38,37 @@ public class ArrayBasedQueueTest {
         assertEquals(1, queue.size());
         assertFalse(queue.isEmpty());
         
-        //TODO: complete this test case
+        queue.enqueue("two");
+        assertEquals(2, queue.size());
+        queue.enqueue("three");
+        assertEquals(3, queue.size());
+        queue.enqueue("four");
+        assertEquals(4, queue.size());
+        queue.enqueue("five");
+        assertEquals(5, queue.size());
+        assertEquals("one", queue.dequeue());
+        assertEquals(4, queue.size());
+        assertEquals("two", queue.dequeue());
+        assertEquals(3, queue.size());
+        assertEquals("three", queue.dequeue());
+        assertEquals(2, queue.size());
+        //enqueue well past capacity to test wrapping around
+        queue.enqueue("six");
+        assertEquals(3, queue.size());
+        queue.enqueue("seven");
+        assertEquals(4, queue.size());
+        queue.enqueue("eight");
+        assertEquals(5, queue.size());
+        queue.enqueue("nine");
+        assertEquals(6, queue.size());
+        queue.enqueue("ten");
+        assertEquals(7, queue.size());
+        queue.enqueue("eleven");
+        assertEquals(8, queue.size());
+        queue.enqueue("twelve");
+        assertEquals(9, queue.size());
+        queue.enqueue("thirteen");
+        assertEquals(10, queue.size());
     }
     
     /**
@@ -53,17 +84,15 @@ public class ArrayBasedQueueTest {
             assertTrue(e instanceof NoSuchElementException);
         }        
         
-        //TODO: complete this test case
-        
 
     }
-    
-    /**
-     * Test the output of the front() behavior, including expected exceptions
-     */     
-    @Test
-    public void testFront() {
-        //TODO: complete this test case
-    }
+//    
+//    /**
+//     * Test the output of the front() behavior, including expected exceptions
+//     */     
+//    @Test
+//    public void testFront() {
+//        
+//    }
 
 }

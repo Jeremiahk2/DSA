@@ -50,6 +50,8 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
     public ArrayBasedQueue(int initialCapacity) {
         data = (E[]) (new Object[initialCapacity]);
         size = 0;
+        front = 0;
+        rear = 0;
     }
 
     /**
@@ -78,37 +80,58 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
             }
             @SuppressWarnings("unchecked")
             E[] newData = (E[]) (new Object[newCapacity]);
-            // TODO: complete this code
-            // Remember that we cannot copy an array the same way we do
-            // when resizing an array-based list since we do not want to
-            // "break" the elements in the queue since there may be wrap-around
-            // at the end of the array
+            if (isEmpty()) {
+            	data = newData;
+            }
+            //Put the second half of the list after front (including front) into the new array.
+            for (int i = front; i < size(); i++) {
+            	newData[i - front] = data[i];
+            }
+            //Put the first half of the list after font (excluding front) into the new array.
+            for (int i = 0; i < front; i++) {
+            	newData[front + i] = data[i];
+            }
+            data = newData;
         }
     }
 
 	@Override
 	public void enqueue(E element) {
-		// TODO Auto-generated method stub
-		
+		if (size() == data.length) {
+			ensureCapacity(size() + 1);
+		}
+		data[rear] = element;
+		size++;
+		if (rear + 1 >= data.length && size() != data.length) {
+			rear = (rear + 1) % data.length;
+		}
+		else {
+			rear = rear + 1;
+		}
 	}
 
 	@Override
 	public E dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		E rtnElement = data[front];
+		data[front] = null;
+		front = (front + 1) % data.length;
+		size--;
+		return rtnElement;
 	}
 
 	@Override
 	public E front() {
-		// TODO Auto-generated method stub
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		return data[front];
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
-
-    // TODO: complete this code
 }   
