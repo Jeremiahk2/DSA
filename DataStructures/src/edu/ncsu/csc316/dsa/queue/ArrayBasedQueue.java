@@ -74,7 +74,7 @@ public class ArrayBasedQueue<E> extends AbstractQueue<E> {
     private void ensureCapacity(int minCapacity) {
         int oldCapacity = data.length;
         if (minCapacity > oldCapacity) {
-            int newCapacity = (oldCapacity * 2) + 1;
+            int newCapacity = oldCapacity * 2 + 1;
             if (newCapacity < minCapacity) {
                 newCapacity = minCapacity;
             }

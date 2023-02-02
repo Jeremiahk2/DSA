@@ -92,7 +92,8 @@ public class ArrayBasedQueueTest {
      */     
     @Test
     public void testFront() {
-        
+    	assertEquals(0, queue.size());
+    	assertThrows(NoSuchElementException.class, () -> queue.front());
     }
 
 }
