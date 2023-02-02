@@ -15,6 +15,7 @@ import org.junit.Test;
  */
 public class LinkedStackTest {
 
+	/** the stack to be used for testing purposes */
     private Stack<String> stack;
     
     /**
@@ -37,7 +38,9 @@ public class LinkedStackTest {
         assertEquals(1, stack.size());
         assertFalse(stack.isEmpty());
         
-        //TODO: complete this test case
+        stack.push("two");
+        assertEquals(2, stack.size());
+        assertEquals("two", stack.top());
     }
 
     /**
@@ -53,8 +56,13 @@ public class LinkedStackTest {
         } catch (Exception e) {
             assertTrue(e instanceof EmptyStackException);
         }
-        
-        //TODO: complete this test case
+        stack.push("one");
+        assertEquals("one", stack.pop());
+        stack.push("newOne");
+        stack.push("two");
+        assertEquals("two", stack.pop());
+        assertEquals("newOne", stack.top());
+        assertEquals("newOne", stack.pop());
     }
 
     /**
@@ -63,7 +71,8 @@ public class LinkedStackTest {
     @Test
     public void testTop() { 
         assertEquals(0, stack.size());
-        //TODO: complete this test case
+        assertThrows(EmptyStackException.class, () -> stack.top());
+        
     }
 
 }

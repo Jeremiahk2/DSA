@@ -27,25 +27,27 @@ public class LinkedStack<E> extends AbstractStack<E> {
 
 	@Override
 	public void push(E element) {
-		// TODO Auto-generated method stub
-		
+		list.addLast(element);
 	}
 
 	@Override
 	public E pop() {
-		// TODO Auto-generated method stub
-		return null;
+		if (list.isEmpty() ) {
+			throw new EmptyStackException();
+		}
+		return list.removeLast();
 	}
 
 	@Override
 	public E top() {
-		// TODO Auto-generated method stub
-		return null;
+		if (list.isEmpty() ) {
+			throw new EmptyStackException();
+		}
+		return list.get(list.size() - 1);
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 }
