@@ -126,8 +126,79 @@ public class ArrayBasedQueueTest {
      */     
     @Test
     public void testFront() {
+    	queue = new ArrayBasedQueue<String>(5);
     	assertEquals(0, queue.size());
     	assertThrows(NoSuchElementException.class, () -> queue.front());
+    	
+    	queue.enqueue("one");
+    	assertEquals("one", queue.front());
+    	queue.enqueue("two");
+    	assertEquals("one", queue.front());
+    	queue.enqueue("three");
+    	assertEquals("one", queue.front());
+    	queue.enqueue("four");
+    	assertEquals("one", queue.front());
+    	queue.enqueue("five");
+    	assertEquals("one", queue.front());
+    	
+    	queue.dequeue();
+    	assertEquals("two", queue.front());
+    	queue.dequeue();
+    	assertEquals("three", queue.front());
+    	queue.dequeue();
+    	assertEquals("four", queue.front());
+    	
+    	queue.enqueue("six");
+    	assertEquals("four", queue.front());
+    	queue.enqueue("seven");
+    	assertEquals("four", queue.front());
+    	queue.enqueue("eight");
+    	assertEquals("four", queue.front());
+    	
+    	queue.dequeue();
+    	assertEquals("five", queue.front());
+    	queue.dequeue();
+    	assertEquals("six", queue.front());
+    	queue.dequeue();
+    	assertEquals("seven", queue.front());
+    	queue.dequeue();
+    	assertEquals("eight", queue.front());
+    	queue.dequeue();
+    	assertThrows(NoSuchElementException.class, () -> queue.front());
+    	
+    	queue.enqueue("newOne");
+    	assertEquals("newOne", queue.front());
+    	queue.enqueue("newTwo");
+    	assertEquals("newOne", queue.front());
+    	queue.enqueue("newThree");
+    	assertEquals("newOne", queue.front());
+    	queue.enqueue("newFour");
+    	assertEquals("newOne", queue.front());
+    	queue.enqueue("newFive");
+    	assertEquals("newOne", queue.front());
+    	
+    	queue.dequeue();
+    	assertEquals("newTwo", queue.front());
+    	queue.dequeue();
+    	assertEquals("newThree", queue.front());
+    	queue.dequeue();
+    	assertEquals("newFour", queue.front());
+    	queue.dequeue();
+    	assertEquals("newFive", queue.front());
+    	
+    	queue.enqueue("six");
+    	assertEquals("newFive", queue.front());
+    	queue.enqueue("seven");
+    	assertEquals("newFive", queue.front());
+    	queue.enqueue("eight");
+    	assertEquals("newFive", queue.front());
+    	queue.enqueue("nine");
+    	assertEquals("newFive", queue.front());
+    	
+    	queue.enqueue("ten");
+    	assertEquals("newFive", queue.front());
+    	assertEquals("newFive", queue.dequeue());
+    	assertEquals("six", queue.front());
     }
 
 }
