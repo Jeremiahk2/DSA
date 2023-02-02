@@ -11,6 +11,7 @@ import org.junit.Test;
  * a circular array-based data structure
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class ArrayBasedQueueTest {

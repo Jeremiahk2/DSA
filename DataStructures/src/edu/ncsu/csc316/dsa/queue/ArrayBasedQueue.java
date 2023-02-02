@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
  * amortized cost for adding to the queue.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the queue
  */

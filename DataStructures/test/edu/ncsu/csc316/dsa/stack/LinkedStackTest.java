@@ -11,6 +11,7 @@ import org.junit.Test;
  * a singly-linked list data structure
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class LinkedStackTest {

@@ -9,6 +9,7 @@ import edu.ncsu.csc316.dsa.list.SinglyLinkedList;
  * support efficient, O(1) worst-case Stack abstract data type behaviors.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the stack
  */
