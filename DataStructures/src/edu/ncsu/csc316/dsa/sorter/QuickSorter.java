@@ -196,7 +196,7 @@ public class QuickSorter<E extends Comparable<E>> extends AbstractComparisonSort
 
         @Override
         public int selectPivot(int low, int high) {
-            return (high - low) / 2;
+            return ((high - low) / 2) + low;
         }
     }
     
