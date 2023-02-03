@@ -9,6 +9,7 @@ import java.util.Comparator;
  * array of n elements that are comparable.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements to sort; elements must be {@link Comparable}
  */
@@ -45,6 +46,12 @@ public class MergeSorter<E extends Comparable<E>> extends AbstractComparisonSort
 		}
 	}
 	
+	/**
+	 * merges the left and the right half of the array into a new array containing both(sorted)
+	 * @param left the left half of the array
+	 * @param right the right half of the array
+	 * @param original the original array (with both halves)
+	 */
 	private void merge(E[] left, E[] right, E[] original) {
 		int leftIndex = 0;
 		int rightIndex = 0;
