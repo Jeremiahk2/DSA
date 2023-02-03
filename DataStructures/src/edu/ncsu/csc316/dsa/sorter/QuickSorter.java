@@ -180,7 +180,9 @@ public class QuickSorter<E extends Comparable<E>> extends AbstractComparisonSort
         @Override
         public int selectPivot(int low, int high) {
         	Random rand = new Random();
-            return (rand.nextInt(low, high + 1));
+        	int randomNumber = rand.nextInt(100);
+        	int number = (randomNumber % (high - low + 1)) + low;
+            return number;
         }
     }
     
