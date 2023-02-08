@@ -18,39 +18,77 @@ import edu.ncsu.csc316.dsa.list.positional.PositionalList;
  * @param <K> the type of keys stored in the map
  * @param <V> the type of values that are associated with keys in the map
  */
-public class UnorderedLinkedMap<K, V> extends AbstractMap<K, V>{
+public class UnorderedLinkedMap<K, V> extends AbstractMap<K, V> {
 
+	/** the positional list that contains our entries */
     private PositionalList<Entry<K, V>> list;
-    
+    /**
+     * constructor for unordered linked maps
+     * Initializes list
+     */
     public UnorderedLinkedMap() {
         this.list = new PositionalLinkedList<Entry<K, V>>();
     }
-    
-    private Position<Entry<K, V>> lookUp(K key)
-    {
-        //TODO: complete this method
+    /**
+     * Finds a specific entry with the given key in the list
+     * @param key the key to look for
+     * @return Position the position in the list with the given key
+     */
+    private Position<Entry<K, V>> lookUp(K key) {
+    	Position<Entry<K, V>> current = list.first();
+    	Position<Entry<K, V>> value = null;
+        for (int i = 0; i < list.size(); i++) {
+        	if (current.getElement().getKey().equals(key)) {
+        		value = current;
+        	}
+        }
+        return value;
     }
 
     @Override
     public V get(K key) {
         Position<Entry<K, V>> p = lookUp(key);
-        //TODO: complete this method
+        if (p == null) {
+        	return null;
+        }
+        else {
+        	moveToFront(p);
+        	return p.getElement().getValue();
+        }
     }
-    
+    /**
+     * Moves the given position to the front of the list
+     * @param position the position to be moved
+     */
     private void moveToFront(Position<Entry<K, V>> position) {
-        //TODO: complete this method
+        list.remove(position);
+        list.addFirst(position.getElement());
     }
 
-    @Override
+    
+	@Override
     public V put(K key, V value) {
         Position<Entry<K, V>> p = lookUp(key);
-        //TODO: complete this method
+        V oldValue = null;
+        if (p == null) {
+        	list.addFirst(new MapEntry<K, V>(key, value));
+        	return null;
+        }
+        else {
+        	oldValue = p.getElement().getValue();
+        	list.remove(p);
+        	list.addFirst(new MapEntry<K, V>(key, value));
+        	return oldValue;
+        }
     }
     
     @Override
     public V remove(K key) {
        Position<Entry<K, V>> p = lookUp(key);
-       //TODO: complete this method
+       if (p == null) {
+    	   return null;
+       }
+       return list.remove(p).getValue();
     }
     
     @Override
@@ -60,7 +98,11 @@ public class UnorderedLinkedMap<K, V> extends AbstractMap<K, V>{
     
     @Override
     public Iterable<Entry<K, V>> entrySet() {
-        // TODO: The activity writeup will guide you with implementing this method
+        EntryCollection collection = new EntryCollection();
+        for(Entry<K, V> entry : list) {
+            collection.add(entry);
+        }
+        return collection;
     }
     
     @Override
