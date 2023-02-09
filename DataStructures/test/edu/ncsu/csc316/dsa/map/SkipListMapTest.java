@@ -8,12 +8,13 @@ import edu.ncsu.csc316.dsa.data.Student;
 import edu.ncsu.csc316.dsa.map.Map.Entry;
 
 /**
- * Test class for SearchTableMap
+ * Test class for SkipListMap
  * Checks the expected outputs of the Map abstract data type behaviors when using
  * a sorted array-based data structure that uses binary search to locate entries
  * based on the key of the entry
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class SkipListMapTest {

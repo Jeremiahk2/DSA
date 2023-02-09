@@ -14,6 +14,7 @@ import edu.ncsu.csc316.dsa.map.Map.Entry;
  * based on the key of the entry
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class SearchTableMapTest {

@@ -13,6 +13,7 @@ import edu.ncsu.csc316.dsa.list.ArrayBasedList;
  * Insertions and deletions have O(n) worst-case runtime.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <K> the type of keys stored in the map
  * @param <V> the type of values that are associated with keys in the map

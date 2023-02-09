@@ -13,6 +13,7 @@ import edu.ncsu.csc316.dsa.map.Map.Entry;
  * self-organizing entries based on access frequency
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class UnorderedLinkedMapTest {
