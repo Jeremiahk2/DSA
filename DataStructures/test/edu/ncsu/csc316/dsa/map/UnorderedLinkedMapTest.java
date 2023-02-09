@@ -2,8 +2,13 @@ package edu.ncsu.csc316.dsa.map;
 
 import static org.junit.Assert.*;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.ncsu.csc316.dsa.map.AbstractMap.MapEntry;
+import edu.ncsu.csc316.dsa.map.Map.Entry;
 
 /**
  * Test class for UnorderedLinkedMap
@@ -16,6 +21,7 @@ import org.junit.Test;
  */
 public class UnorderedLinkedMapTest {
 
+	/** map to be used for testing purposes */
     private Map<Integer, String> map;
     
     /**
@@ -37,7 +43,8 @@ public class UnorderedLinkedMapTest {
         assertEquals("UnorderedLinkedMap[3]", map.toString());
         assertEquals(1, map.size());
 
-        //TODO: complete this test case
+        assertEquals("string3", map.put(3, "DifferentString"));
+        assertNull(map.put(4, "AnotherDifferentString"));
     }
 
     /**
@@ -47,17 +54,26 @@ public class UnorderedLinkedMapTest {
     public void testGet() {
         assertTrue(map.isEmpty());
         assertNull(map.put(3, "string3"));
+        assertEquals("string3", map.get(3));
         assertNull(map.put(5, "string5"));
+        assertEquals("string5", map.get(5));
         assertNull(map.put(2, "string2"));
+        assertEquals("string2", map.get(2));
         assertNull(map.put(4, "string4"));
+        assertEquals("string4", map.get(4));
         assertNull(map.put(1, "string1"));
         assertFalse(map.isEmpty());
         assertEquals("UnorderedLinkedMap[1, 4, 2, 5, 3]", map.toString());
         
-        assertEquals("string1",map.get(1));
+        assertEquals("string1", map.get(1));
         assertEquals("UnorderedLinkedMap[1, 4, 2, 5, 3]", map.toString());
         
-        //TODO: complete this test case
+        map.get(2);
+        
+        assertEquals("UnorderedLinkedMap[2, 1, 4, 5, 3]", map.toString());
+        
+        map.get(80);
+        assertEquals("UnorderedLinkedMap[2, 1, 4, 5, 3]", map.toString());
     }
     
     /**
@@ -74,7 +90,13 @@ public class UnorderedLinkedMapTest {
         assertFalse(map.isEmpty());
         assertEquals("UnorderedLinkedMap[1, 4, 2, 5, 3]", map.toString());
         
-        //TODO: complete this test case
+        assertEquals("string3", map.remove(3));
+        assertEquals("UnorderedLinkedMap[1, 4, 2, 5]", map.toString());
+        
+        assertEquals(null, map.remove(20));
+        
+        assertEquals("string4", map.remove(4));
+        
     }
 
     /**
@@ -87,8 +109,17 @@ public class UnorderedLinkedMapTest {
         assertNull(map.put(2, "string2"));
         assertNull(map.put(4, "string4"));
         assertNull(map.put(1, "string1"));
-
-        //TODO: complete this test case
+        Iterator<Integer> it = map.iterator();
+        assertTrue(it.hasNext());
+        assertThrows(UnsupportedOperationException.class, () -> it.remove());
+        
+        assertEquals("string1", map.get(it.next()));
+        assertEquals("string4", map.get(it.next()));
+        assertEquals("string2", map.get(it.next()));
+        assertThrows(UnsupportedOperationException.class, () -> it.remove());
+        assertEquals("string5", map.get(it.next()));
+        assertEquals("string3", map.get(it.next()));
+        assertFalse(it.hasNext());
     }
 
     /**
@@ -96,13 +127,25 @@ public class UnorderedLinkedMapTest {
      */     
     @Test
     public void testEntrySet() {
-        assertNull(map.put(3, "string3"));
         assertNull(map.put(5, "string5"));
-        assertNull(map.put(2, "string2"));
         assertNull(map.put(4, "string4"));
+        assertNull(map.put(3, "string3"));
+        assertNull(map.put(2, "string2"));
         assertNull(map.put(1, "string1"));
+        Iterable<Entry<Integer, String>> iterable = map.entrySet();
+        Iterator<Entry<Integer, String>> it = iterable.iterator();
+        assertTrue(it.hasNext());
+        assertThrows(UnsupportedOperationException.class, () -> it.remove());
         
-        //TODO: complete this test case
+        assertEquals("string1", it.next().getValue());
+        assertEquals( "string2", it.next().getValue());
+        assertEquals( "string3", it.next().getValue());
+        assertThrows(UnsupportedOperationException.class, () -> it.remove());
+        assertEquals("string4", it.next().getValue());
+        assertEquals( "string5", it.next().getValue());
+        assertFalse(it.hasNext());
+        
+        
     }
 
     /**
@@ -116,6 +159,20 @@ public class UnorderedLinkedMapTest {
         assertNull(map.put(4, "string4"));
         assertNull(map.put(1, "string1"));
         
-        //TODO: complete this test case
+        Iterable<String> iterable = map.values();
+        Iterator<String> it = iterable.iterator();
+        
+        assertTrue(it.hasNext());
+        assertThrows(UnsupportedOperationException.class, () -> it.remove());
+        
+        assertEquals("string1", it.next());
+        assertEquals( "string4", it.next());
+        assertEquals( "string2", it.next());
+        assertThrows(UnsupportedOperationException.class, () -> it.remove());
+        assertEquals("string5", it.next());
+        assertEquals( "string3", it.next());
+        assertFalse(it.hasNext());
+        
+        
     }
 }

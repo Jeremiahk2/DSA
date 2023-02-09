@@ -41,6 +41,7 @@ public class UnorderedLinkedMap<K, V> extends AbstractMap<K, V> {
         	if (current.getElement().getKey().equals(key)) {
         		value = current;
         	}
+        	current = list.after(current);
         }
         return value;
     }
