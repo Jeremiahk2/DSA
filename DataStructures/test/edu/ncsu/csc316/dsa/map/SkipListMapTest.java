@@ -73,6 +73,8 @@ public class SkipListMapTest {
 
 		map.get(80);
 		assertEquals("SkipListMap[1, 2, 3, 4, 5]", map.toString());
+		
+		assertEquals(null, map.get(6));
 	}
 
 	/**

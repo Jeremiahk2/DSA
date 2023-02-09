@@ -100,6 +100,9 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
         if (isSentinel(temp)) {
         	return null;
         }
+        if (!temp.getEntry().getKey().equals(key)) {
+        	return null;
+        }
         return temp.getEntry().getValue();
     }
 
