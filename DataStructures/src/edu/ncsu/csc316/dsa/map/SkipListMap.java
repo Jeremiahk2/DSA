@@ -210,28 +210,28 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
         return sb.toString();
     }
 
-    // This method may be useful for testing or debugging.
-    // You may comment-out this method instead of testing it, since
-    // the full string will depend on the series of random coin flips
-    // and will not have deterministic expected results.
-    public String toFullString() {
-        StringBuilder sb = new StringBuilder("SkipListMap[\n");
-        SkipListNode<K, V> cursor = start;
-        SkipListNode<K, V> firstInList = start;
-        while (cursor != null) {
-            firstInList = cursor;
-            sb.append("-INF -> ");
-            cursor = cursor.next;
-            while (cursor != null && !isSentinel(cursor)) {
-                sb.append(cursor.getEntry().getKey() + " -> ");
-                cursor = cursor.next;
-            }
-            sb.append("+INF\n");
-            cursor = firstInList.below;
-        }
-        sb.append("]");
-        return sb.toString();
-    }
+//    // This method may be useful for testing or debugging.
+//    // You may comment-out this method instead of testing it, since
+//    // the full string will depend on the series of random coin flips
+//    // and will not have deterministic expected results.
+//    public String toFullString() {
+//        StringBuilder sb = new StringBuilder("SkipListMap[\n");
+//        SkipListNode<K, V> cursor = start;
+//        SkipListNode<K, V> firstInList = start;
+//        while (cursor != null) {
+//            firstInList = cursor;
+//            sb.append("-INF -> ");
+//            cursor = cursor.next;
+//            while (cursor != null && !isSentinel(cursor)) {
+//                sb.append(cursor.getEntry().getKey() + " -> ");
+//                cursor = cursor.next;
+//            }
+//            sb.append("+INF\n");
+//            cursor = firstInList.below;
+//        }
+//        sb.append("]");
+//        return sb.toString();
+//    }
 
     private static class SkipListNode<K, V> {
 
