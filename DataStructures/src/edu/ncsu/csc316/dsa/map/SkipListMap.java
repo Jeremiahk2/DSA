@@ -18,6 +18,7 @@ import java.util.Random;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley and Sons, 2014
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <K> the type of keys stored in the map
  * @param <V> the type of values that are associated with keys in the map
@@ -76,6 +77,12 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
         height = 0;
     }
     
+    /**
+     * looks up a node with the given key.
+     * This method MIGHT NOT RETURN the key that was requested. But only if the key is not in the list.
+     * @param key the key to be found
+     * @return the node with the given key
+     */
     private SkipListNode<K, V> lookUp(K key) {
         SkipListNode<K, V> current = start;
         while (current.below != null) {
@@ -89,6 +96,11 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
 
     // Helper method to determine if an entry is one of the sentinel
     // -INFINITY or +INFINITY nodes (containing a null key)
+    /**
+     * Checks if the given node is the sentinel node
+     * @param node the node to check
+     * @return boolean about whether or nor the node is the sentinel node
+     */
     private boolean isSentinel(SkipListNode<K, V> node) {
         return node.getEntry() == null;
     }
@@ -106,6 +118,13 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
         return temp.getEntry().getValue();
     }
 
+    /**
+     * helper method for put() Inserts the entry after and above the node from the recursion.
+     * @param prev the previous node
+     * @param down the node below this one
+     * @param entry the information to be stored
+     * @return the new node created
+     */
     private SkipListNode<K, V> insertAfterAbove(SkipListNode<K, V> prev, SkipListNode<K, V> down, Entry<K, V> entry) {
         SkipListNode<K, V> newNode = new SkipListNode<>(entry);
         newNode.setBelow(down);
@@ -242,14 +261,32 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
 //        return sb.toString();
 //    }
 
+    /**
+     * SkipListNodes are nodes with an above, below, prev, and next reference, as well as the information they store.
+     * @author Jeremiah Knizley
+     *
+     * @param <K> the type of key to the node
+     * @param <V> the type of value in the node
+     */
     private static class SkipListNode<K, V> {
 
+    	/**
+    	 * the information to be stored in the node
+    	 */
         private Entry<K, V> entry;
+        /** the node above this one */
         private SkipListNode<K, V> above;
+        /** the node below this one */
         private SkipListNode<K, V> below;
+        /** the node before this one */
         private SkipListNode<K, V> prev;
+        /** the node after this one */
         private SkipListNode<K, V> next;
 
+        /**
+         * creates a new SkipListNode with the given entry, all other params are set to null
+         * @param entry the information in the node
+         */
         public SkipListNode(Entry<K, V> entry) {
             setEntry(entry);
             setAbove(null);
@@ -258,38 +295,74 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
             setNext(null);
         }
 
+        /**
+         * returns the node above this one
+         * @return the node above this one
+         */
         public SkipListNode<K, V> getAbove() {
             return above;
         }
 
+        /**
+         * returns the entry in this node
+         * @return the entry in this node
+         */
         public Entry<K, V> getEntry() {
             return entry;
         }
 
+        /**
+         * returns the next node after this one
+         * @return the next node
+         */
         public SkipListNode<K, V> getNext() {
             return next;
         }
 
+        /**
+         * returns the previous node
+         * @return the previous node
+         */
         public SkipListNode<K, V> getPrevious() {
             return prev;
         }
 
+        /**
+         * sets the above node to up
+         * @param up the node to be above this one
+         */
         public void setAbove(SkipListNode<K, V> up) {
             this.above = up;
         }
 
+        /**
+         * sets the below node to down
+         * @param down the node to be below this one
+         */
         public void setBelow(SkipListNode<K, V> down) {
             this.below = down;
         }
 
+        /**
+         * sets the entry of this node
+         * @param entry the new entry of this node
+         */
         public void setEntry(Entry<K, V> entry) {
             this.entry = entry;
         }
 
+        /**
+         * sets the next node after this one
+         * @param next the new next node
+         */
         public void setNext(SkipListNode<K, V> next) {
             this.next = next;
         }
 
+        /**
+         * sets the previous node
+         * @param prev the new previous node
+         */
         public void setPrevious(SkipListNode<K, V> prev) {
             this.prev = prev;
         }
