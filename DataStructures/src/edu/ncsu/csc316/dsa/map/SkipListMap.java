@@ -161,7 +161,7 @@ public class SkipListMap<K extends Comparable<K>, V> extends AbstractOrderedMap<
         }
         while (temp != null) {
         	SkipListNode<K, V> tempPrev = temp.prev;
-        	temp.prev = temp.next;
+        	temp.prev.next = temp.next;
         	temp.next.prev = tempPrev;
         	temp.below = null;
         	temp = temp.getAbove();
