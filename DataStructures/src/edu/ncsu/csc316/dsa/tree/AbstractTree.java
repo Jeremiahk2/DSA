@@ -5,7 +5,7 @@ import java.util.Iterator;
 import edu.ncsu.csc316.dsa.Position;
 import edu.ncsu.csc316.dsa.list.List;
 import edu.ncsu.csc316.dsa.list.SinglyLinkedList;
-import edu.ncsu.csc316.dsa.queue.Queue;
+import edu.ncsu.csc316.dsa.queue.ArrayBasedQueue;
 
 /**
  * A skeletal implementation of the Tree abstract data type. This class provides
@@ -48,20 +48,53 @@ public abstract class AbstractTree<E> implements Tree<E> {
     
     @Override
     public Iterable<Position<E>> preOrder() {
-        // TODO: you will complete this method in a later step of the workshop
-    	return null;
-    }   
+        PositionCollection traversal = new PositionCollection();
+        if (!isEmpty()) {
+            preOrderHelper(root(), traversal);
+        }
+        return traversal;
+    }
+
+    private void preOrderHelper(Position<E> p, PositionCollection traversal) {
+        traversal.add(p);
+        for (Position<E> c : children(p)) {
+            preOrderHelper(c, traversal);
+        }
+    }    
     
     @Override
     public Iterable<Position<E>> postOrder() {
-        // TODO: you will complete this method in a later step of the workshop
-    	return null;
+    	PositionCollection traversal = new PositionCollection();
+        if (!isEmpty()) {
+            postOrderHelper(root(), traversal);
+        }
+        return traversal;
+    }
+    
+    private void postOrderHelper(Position<E> p, PositionCollection traversal) {
+        for (Position<E> c : children(p)) {
+            postOrderHelper(c, traversal);
+        }
+        traversal.add(p);
     }
     
     @Override
     public Iterable<Position<E>> levelOrder() {
-        // TODO: you will complete this method in a later step of the workshop
-    	return null;
+    	PositionCollection traversal = new PositionCollection();
+    	ArrayBasedQueue<Position<E>> queue = new ArrayBasedQueue<>();
+    	Position<E> p = root();
+    	if (p == null) {
+    		return traversal;
+    	}
+    	queue.enqueue(p);
+    	while (!queue.isEmpty()) {
+    		Position<E> q = queue.dequeue();
+    		traversal.add(q);
+    		for (Position<E> c : children(q)) {
+                queue.enqueue(c);
+            }
+    	}
+    	return traversal;
     }
     
     /**
@@ -75,7 +108,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     protected abstract AbstractTreeNode<E> validate(Position<E> p);
     
     protected abstract static class AbstractTreeNode<E> implements Position<E> {
-
+    	/** the element stored in the AbstractTreeNode */
         private E element;
         
         public AbstractTreeNode(E element) {
@@ -94,7 +127,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
     
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(this.getClass().getSimpleName()+"[\n");
+        StringBuilder sb = new StringBuilder(this.getClass().getSimpleName() + "[\n");
         toStringHelper(sb, "", root());
         sb.append("]");
         return sb.toString();
@@ -119,7 +152,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
      *
      */
     protected class PositionCollection implements Iterable<Position<E>> {
-
+    	/** the list of positions in this collection */
         private List<Position<E>> list;
 
         /**
@@ -143,13 +176,14 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
         /**
          * Return an iterator for the PositionCollection
+         * @return a new PositionSetIterator
          */
         public Iterator<Position<E>> iterator() {
             return new PositionSetIterator();
         }
 
         private class PositionSetIterator implements Iterator<Position<E>> {
-
+        	/** the iterator object */
             private Iterator<Position<E>> it;
 
             public PositionSetIterator() {

@@ -5,7 +5,6 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 import edu.ncsu.csc316.dsa.Position;
-import edu.ncsu.csc316.dsa.tree.LinkedBinaryTree;
 
 /**
  * Test class for LinkedBinaryTree
@@ -221,7 +220,17 @@ public class LinkedBinaryTreeTest {
     @Test
     public void testPreOrder() {
         createTree();
-        //TODO: complete this test case after you have finished
+        Iterator<Position<String>> it = tree.preOrder().iterator();
+        assertEquals("one", it.next().getElement());
+        assertEquals("two", it.next().getElement());
+        assertEquals("six", it.next().getElement());
+        assertEquals("ten", it.next().getElement());
+        assertEquals("seven", it.next().getElement());
+        assertEquals("five", it.next().getElement());
+        assertEquals("three", it.next().getElement());
+        assertEquals("four", it.next().getElement());
+        assertEquals("eight", it.next().getElement());
+        assertEquals("nine", it.next().getElement());
         // the coding activity task for implementing traversals
     }
 
@@ -231,7 +240,17 @@ public class LinkedBinaryTreeTest {
     @Test
     public void testPostOrder() {
         createTree();
-        //TODO: complete this test case after you have finished
+        Iterator<Position<String>> it = tree.postOrder().iterator();
+        assertEquals("six", it.next().getElement());
+        assertEquals("seven", it.next().getElement());
+        assertEquals("five", it.next().getElement());
+        assertEquals("ten", it.next().getElement());
+        assertEquals("two", it.next().getElement());
+        assertEquals("eight", it.next().getElement());
+        assertEquals("nine", it.next().getElement());
+        assertEquals("four", it.next().getElement());
+        assertEquals("three", it.next().getElement());
+        assertEquals("one", it.next().getElement());
         // the coding activity task for implementing traversals
     }
     
@@ -241,8 +260,17 @@ public class LinkedBinaryTreeTest {
     @Test
     public void testInOrder() {
         createTree();
-        //TODO: complete this test case after you have finished
-        // the coding activity task for implementing traversals
+        Iterator<Position<String>> it = tree.inOrder().iterator();
+        assertEquals("six", it.next().getElement());
+        assertEquals("two", it.next().getElement());
+        assertEquals("seven", it.next().getElement());
+        assertEquals("ten", it.next().getElement());
+        assertEquals("five", it.next().getElement());
+        assertEquals("one", it.next().getElement());
+        assertEquals("eight", it.next().getElement());
+        assertEquals("four", it.next().getElement());
+        assertEquals("nine", it.next().getElement());
+        assertEquals("three", it.next().getElement());
     }
 
     /**
@@ -259,7 +287,17 @@ public class LinkedBinaryTreeTest {
     @Test
     public void testLevelOrder() {
         createTree();
-        //TODO: complete this test case after you have finished
+        Iterator<Position<String>> it = tree.levelOrder().iterator();
+        assertEquals("one", it.next().getElement());
+        assertEquals("two", it.next().getElement());
+        assertEquals("three", it.next().getElement());
+        assertEquals("six", it.next().getElement());
+        assertEquals("ten", it.next().getElement());
+        assertEquals("four", it.next().getElement());
+        assertEquals("seven", it.next().getElement());
+        assertEquals("five", it.next().getElement());
+        assertEquals("eight", it.next().getElement());
+        assertEquals("nine", it.next().getElement());
         // the coding activity task for implementing traversals
     }
 
@@ -293,6 +331,7 @@ public class LinkedBinaryTreeTest {
         assertNull(tree.right(four));
         assertEquals(tree.sibling(eight), null);
         assertEquals("four", tree.remove(four));
+        assertEquals(8, tree.size());
         
     }
 }

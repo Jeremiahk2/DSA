@@ -20,8 +20,9 @@ import edu.ncsu.csc316.dsa.Position;
  * @param <E> the type of elements stored in the binary tree
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
-
+	/** the root of the binary tree (the top) */
     private BinaryTreeNode<E> root;
+    /** the size of the tree */
     private int size;
 
     /**
@@ -56,8 +57,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @param <E> the type of element stored in the node
      */
     public static class BinaryTreeNode<E> extends AbstractTreeNode<E> {
+    	/** the parent of the node */
         private BinaryTreeNode<E> parent;
+        /** the left child of the node */
         private BinaryTreeNode<E> left;
+        /** the right child of the node */
         private BinaryTreeNode<E> right;
 
         /**
@@ -202,7 +206,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         BinaryTreeNode<E> parent = validate(parent(p));
         E oldElement = node.getElement();
         if (node.equals(root)) {
-        	root = null;
+        	if (left(root) != null) {
+        		root = validate(left(root));
+        	}
+        	else {
+        		root = validate(right(root));
+        	}
         }
         else if (numChildren(p) == 0) {
         	if (left(parent).equals(node)) {
@@ -220,7 +229,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         		parent.setRight(validate(right(node)));
         	}
         }
-        //size--;
+        size--;
         return oldElement;
     }
 

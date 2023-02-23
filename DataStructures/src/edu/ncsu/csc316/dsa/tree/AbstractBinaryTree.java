@@ -15,10 +15,25 @@ import edu.ncsu.csc316.dsa.Position;
 public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {
     
     
-    @Override
+	@Override
     public Iterable<Position<E>> inOrder() {
-        //TODO: you will complete this method in a later step of the workshop
-    	return null;
+		PositionCollection traversal = new PositionCollection();
+        if (!isEmpty()) {
+            inOrderHelper(root(), traversal);
+        }
+        return traversal;
+    }
+
+    private void inOrderHelper(Position<E> p, PositionCollection traversal) {
+    	for (Position<E> c : children(p)) {
+            inOrderHelper(c, traversal);
+            if (isLeaf(validate(c))) {
+            	traversal.add(c);
+            }
+            if (right(p) == null || right(p) != null && !right(p).equals(c)) {
+            	traversal.add(p);
+            }
+        }
     }
     
     @Override
