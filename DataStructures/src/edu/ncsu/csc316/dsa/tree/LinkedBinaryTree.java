@@ -220,6 +220,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         	else {
         		root = validate(right(root));
         	}
+        	oldElement = root.getElement();
         }
         else if (numChildren(p) == 0) {
         	if (left(parent).equals(node)) {
