@@ -350,6 +350,8 @@ public class LinkedBinaryTreeTest {
         		+ "   five\n"
         		+ " eight\n"
         		+ "]", tree.toString());
+        assertEquals("six", tree.remove(six));
+        assertEquals("two", tree.remove(two));
         
     }
 }

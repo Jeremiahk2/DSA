@@ -234,7 +234,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         	else if (right(node) != null) {
         		if (left(parent) != null && left(parent).equals(node)) {
         			parent.setLeft(validate(right(node)));
-        			validate(left(node)).setParent(parent);
+        			validate(right(node)).setParent(parent);
         		}
         		else {
         			parent.setRight(validate(right(node)));
