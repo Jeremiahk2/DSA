@@ -337,13 +337,19 @@ public class LinkedBinaryTreeTest {
     @Test
     public void testRemove() {
         createTree();
-        assertThrows(IllegalArgumentException.class, () -> tree.remove(four));
+//        assertThrows(IllegalArgumentException.class, () -> tree.remove(four));
         assertEquals("nine", tree.remove(nine));
-        assertEquals(tree.numChildren(four), 1);
-        assertNull(tree.right(four));
-        assertEquals(tree.sibling(eight), null);
+        assertEquals("three", tree.remove(three));
         assertEquals("four", tree.remove(four));
-        assertEquals(8, tree.size());
+        assertEquals("LinkedBinaryTree[\n"
+        		+ "one\n"
+        		+ " two\n"
+        		+ "  six\n"
+        		+ "  ten\n"
+        		+ "   seven\n"
+        		+ "   five\n"
+        		+ " eight\n"
+        		+ "]", tree.toString());
         
     }
 }

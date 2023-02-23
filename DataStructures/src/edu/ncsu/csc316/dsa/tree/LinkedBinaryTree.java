@@ -223,11 +223,25 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
         else {
         	if (left(node) != null) {
-        		parent.setLeft(validate(left(node)));
+        		if (left(parent) != null && left(parent).equals(node)) {
+        			parent.setLeft(validate(left(node)));
+        		}
+        		else {
+        			parent.setRight(validate(left(node)));
+        		}
+        		validate(left(node)).setParent(parent);
         	}
         	else if (right(node) != null) {
-        		parent.setRight(validate(right(node)));
+        		if (left(parent) != null && left(parent).equals(node)) {
+        			parent.setLeft(validate(right(node)));
+        			validate(left(node)).setParent(parent);
+        		}
+        		else {
+        			parent.setRight(validate(right(node)));
+        		}
+        		validate(right(node)).setParent(parent);
         	}
+        	
         }
         size--;
         return oldElement;
