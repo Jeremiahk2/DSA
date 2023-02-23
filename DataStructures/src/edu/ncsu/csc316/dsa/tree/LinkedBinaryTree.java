@@ -199,12 +199,20 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public E remove(Position<E> p) {
+    	if (p == null) {
+    		return null;
+    	}
         if (numChildren(p) == 2) {
             throw new IllegalArgumentException("The node has two children");
         }
+        
         BinaryTreeNode<E> node = validate(p);
-        BinaryTreeNode<E> parent = validate(parent(p));
-        E oldElement = node.getElement();
+        BinaryTreeNode<E> parent = null;
+        E oldElement = null;
+        if (!node.equals(root)) {
+        	parent = validate(parent(p));
+        	oldElement = node.getElement();
+        }
         if (node.equals(root)) {
         	if (left(root) != null) {
         		root = validate(left(root));
