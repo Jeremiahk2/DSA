@@ -101,6 +101,18 @@ public class LinkedBinaryTreeTest {
         assertTrue(tree.isEmpty());
         createTree();
         assertEquals(10, tree.size());
+        assertEquals("LinkedBinaryTree[\n"
+        		+ "one\n"
+        		+ " two\n"
+        		+ "  six\n"
+        		+ "  ten\n"
+        		+ "   seven\n"
+        		+ "   five\n"
+        		+ " three\n"
+        		+ "  four\n"
+        		+ "   eight\n"
+        		+ "   nine\n"
+        		+ "]", tree.toString());
     }
     
     /**
