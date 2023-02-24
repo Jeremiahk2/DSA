@@ -14,6 +14,7 @@ import edu.ncsu.csc316.dsa.queue.ArrayBasedQueue;
  * abstract data type.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the tree
  */
@@ -55,6 +56,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
         return traversal;
     }
 
+    /**
+     * helper method for preOrder method
+     * @param p the current position
+     * @param traversal the list of traversed elements
+     */
     private void preOrderHelper(Position<E> p, PositionCollection traversal) {
         traversal.add(p);
         for (Position<E> c : children(p)) {
@@ -70,7 +76,11 @@ public abstract class AbstractTree<E> implements Tree<E> {
         }
         return traversal;
     }
-    
+    /**
+     * helper method for postOrder method
+     * @param p the current position
+     * @param traversal the list of traversed elements
+     */
     private void postOrderHelper(Position<E> p, PositionCollection traversal) {
         for (Position<E> c : children(p)) {
             postOrderHelper(c, traversal);

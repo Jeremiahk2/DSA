@@ -12,6 +12,7 @@ import edu.ncsu.csc316.dsa.Position;
  * a linked data structure to store elements
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class LinkedBinaryTreeTest {

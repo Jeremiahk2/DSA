@@ -53,6 +53,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * child, and right child
      * 
      * @author Dr. King
+     * @author Jeremiah Knizley
      *
      * @param <E> the type of element stored in the node
      */

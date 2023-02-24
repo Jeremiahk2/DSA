@@ -9,6 +9,7 @@ import edu.ncsu.csc316.dsa.Position;
  * the binary tree abstract data type.
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the binary tree
  */
