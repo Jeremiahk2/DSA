@@ -84,6 +84,13 @@ public class BinarySearchTreeMapTest {
 //        assertEquals((Integer)3, it.next());
 //        assertEquals((Integer)5, it.next());
 //        assertEquals((Integer)4, it.next());
+        assertEquals("BalanceableBinaryTree[\n"
+        		+ "edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@2cb4893b\n"
+        		+ " edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@cc43f62\n"
+        		+ "  edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@5b218417\n"
+        		+ "   edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@645aa696\n"
+        		+ "    edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@6caf0677\n"
+        		+ "]", tree.toString());
     }
 
     /**

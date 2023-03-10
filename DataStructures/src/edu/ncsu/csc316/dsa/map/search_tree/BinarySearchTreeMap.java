@@ -214,10 +214,10 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
         return collection;
     }
 
-//    @Override
-//    public String toString() {
-//        return tree.toString();
-//    }
+    @Override
+    public String toString() {
+        return tree.toString();
+    }
 
     /**
      * A method hook that is executed whenever a tree position is accessed
