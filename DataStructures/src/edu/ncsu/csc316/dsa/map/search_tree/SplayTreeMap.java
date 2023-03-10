@@ -55,7 +55,7 @@ public class SplayTreeMap<K extends Comparable<K>, V> extends BinarySearchTreeMa
     private void splay(Position<Entry<K, V>> p) {
     	Position<Entry<K, V>> node = p;
     	while (!isRoot(node)) {
-    		Position<Entry<K, V>> parent = parent(node);
+    		Position<Entry<K, V>> parent = parent(p);
     		Position<Entry<K, V>> grandparent = parent(parent);
 
     		if (grandparent == null || grandparent.getElement() == null || grandparent.getElement().getValue() == null) {
