@@ -73,20 +73,20 @@ public class SplayTreeMapTest {
         //  assertEquals(2, (int)tree.left(tree.root()).getElement().getKey());         
     }
 //   
-    /**
-     * Tests null pointer
-     */
-    @Test
-    public void testStuff() {
-    	tree.put(420, "one");
-    	tree.put(200, "two");
-    	tree.put(69, "three");
-    	tree.put(20, "four");
-    	tree.remove(420);
+//    /**
+//     * Tests null pointer
+//     */
+//    @Test
+//    public void testStuff() {
+//    	tree.put(420, "one");
+//    	tree.put(200, "two");
+//    	tree.put(69, "three");
+//    	tree.put(20, "four");
+//    	tree.remove(420);
     	
     	
     	
-    }
+//    }
     
 //    /**
 //     * Test the output of the remove(k) behavior

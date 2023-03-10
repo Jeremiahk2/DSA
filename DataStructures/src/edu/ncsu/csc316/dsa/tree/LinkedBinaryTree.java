@@ -205,7 +205,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     if (numChildren(p) == 2) {
      throw new IllegalArgumentException("p has two children");
     }
-    	     BinaryTreeNode<E> child = (node.getLeft( ) != null ? node.getLeft( ) : node.getRight( ) );
+    	     BinaryTreeNode<E> child = node.getLeft( ) != null ? node.getLeft( ) : node.getRight( );
     	     if (child != null) {
     	       child.setParent(node.getParent( ));  // child's grandparent becomes its parent
     	     }
