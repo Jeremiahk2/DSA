@@ -7,6 +7,8 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ncsu.csc316.dsa.data.Student;
+
 /**
  * Test class for BinarySearchTreeMap
  * Checks the expected outputs of the Map and Tree abstract data type behaviors when using
@@ -134,5 +136,31 @@ public class BinarySearchTreeMapTest {
         //   - removing from a node that has only a right child
         //   - removing from a node that has both children
         // etc.
+    }
+    
+    /**
+     * Tests Students as keys in the map
+     */
+    @Test
+    public void testStudent() {
+    	Student s1 = new Student("J", "K", 1, 0, 0, "jk");
+        Student s2 = new Student("J", "S", 2, 0, 0, "js");
+        Student s3 = new Student("S", "H", 3, 0, 0, "sh");
+        Student s4 = new Student("J", "J", 4, 0, 0, "jj");
+        Student s5 = new Student("L", "B", 5, 0, 0, "lb");
+        BinarySearchTreeMap<Student, String> sTree = new BinarySearchTreeMap<Student, String>();
+        sTree.put(s1, "One");
+        sTree.put(s2, "two");
+        sTree.put(s3, "three");
+        sTree.put(s4, "four");
+        sTree.put(s5, "five");
+        
+        assertEquals(s1, sTree.root().getElement().getKey());
+        assertEquals(s2, sTree.right(sTree.root()).getElement().getKey());
+        assertEquals(s3, sTree.left(sTree.root()).getElement().getKey());
+        assertEquals(s4, sTree.right(sTree.left(sTree.root())).getElement().getKey());
+        assertEquals(s5, sTree.left(sTree.left(sTree.root())).getElement().getKey());
+        
+        
     }
 }
