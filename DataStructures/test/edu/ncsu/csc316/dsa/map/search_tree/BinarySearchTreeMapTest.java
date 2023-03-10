@@ -1,6 +1,9 @@
 package edu.ncsu.csc316.dsa.map.search_tree;
 
 import static org.junit.Assert.*;
+
+import java.util.Iterator;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -71,6 +74,16 @@ public class BinarySearchTreeMapTest {
         tree.put(4, "four");
         assertEquals(5, tree.size());
         assertEquals("four", tree.get(4));
+        
+        assertEquals(1, (int)tree.root().getElement().getKey());
+        assertEquals(2, (int)tree.right(tree.root()).getElement().getKey());
+        
+        Iterator<Integer> it = tree.iterator();
+        assertEquals((Integer)5, it.next());
+//        assertEquals((Integer)2, it.next());
+//        assertEquals((Integer)3, it.next());
+//        assertEquals((Integer)5, it.next());
+//        assertEquals((Integer)4, it.next());
     }
 
     /**
