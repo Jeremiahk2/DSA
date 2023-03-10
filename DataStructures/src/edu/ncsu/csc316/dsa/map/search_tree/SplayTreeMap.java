@@ -20,7 +20,7 @@ import edu.ncsu.csc316.dsa.Position;
  * the textbook:
  *
  * Data Structures and Algorithms in Java, Sixth Edition Michael T. Goodrich,
- * Roberto Tamassia, and Michael H. Goldwasser John Wiley & Sons, 2014
+ * Roberto Tamassia, and Michael H. Goldwasser John Wiley and Sons, 2014
  * 
  * @author Dr. King
  * @author Jeremiah Knizley
