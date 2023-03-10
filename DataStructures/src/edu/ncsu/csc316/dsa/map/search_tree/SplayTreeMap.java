@@ -63,8 +63,8 @@ public class SplayTreeMap<K extends Comparable<K>, V> extends BinarySearchTreeMa
     			//Perform a single rotation if there is no grandparent
     			rotate(node);
     		}
-    		else if (left(parent).equals(node) && left(grandparent).equals(parent) || 
-    				right(parent).equals(node) && right(grandparent).equals(parent)) {
+    		else if ( node.equals(left(parent)) &&  parent.equals(left(grandparent)) || 
+    				node.equals(right(parent)) && parent.equals(right(grandparent))) {
     			//ZIG-ZIG
     			//Rotate the parent around grandparent first
     			rotate(parent);
