@@ -298,7 +298,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
         public void rotate(Position<Entry<K, V>> p) {
         	//Track the three nodes involved in the rotation
         	BinaryTreeNode<Entry<K, V>> node = validate(p);
-        	BinaryTreeNode<Entry<K, V>> parent = node.getParent();
+        	BinaryTreeNode<Entry<K, V>> parent = validate(parent(p));
         	BinaryTreeNode<Entry<K, V>> grandparent = parent.getParent();
            
             //Check whether the node is a single rotation (no grandparent exists)

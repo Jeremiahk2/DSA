@@ -201,61 +201,33 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public E remove(Position<E> p) {
-    	if (p == null) {
-    		return null;
-    	}
-        if (numChildren(p) == 2) {
-            throw new IllegalArgumentException("The node has two children");
-        }
-        
-        BinaryTreeNode<E> node = validate(p);
-        BinaryTreeNode<E> parent = null;
-        E oldElement = null;
-        if (!node.equals(root)) {
-        	parent = validate(parent(p));
-        	oldElement = node.getElement();
-        }
-        if (node.equals(root)) {
-        	if (left(root) != null) {
-        		root = validate(left(root));
-        	}
-        	else {
-        		root = validate(right(root));
-        	}
-        	oldElement = root.getElement();
-        }
-        else if (numChildren(p) == 0) {
-        	if (left(parent).equals(node)) {
-        		parent.setLeft(null);
-        	}
-        	else {
-        		parent.setRight(null);
-        	}
-        }
-        else {
-        	if (left(node) != null) {
-        		if (left(parent) != null && left(parent).equals(node)) {
-        			parent.setLeft(validate(left(node)));
-        		}
-        		else {
-        			parent.setRight(validate(left(node)));
-        		}
-        		validate(left(node)).setParent(parent);
-        	}
-        	else if (right(node) != null) {
-        		if (left(parent) != null && left(parent).equals(node)) {
-        			parent.setLeft(validate(right(node)));
-        			validate(right(node)).setParent(parent);
-        		}
-        		else {
-        			parent.setRight(validate(right(node)));
-        		}
-        		validate(right(node)).setParent(parent);
-        	}
-        	
-        }
-        size--;
-        return oldElement;
+    	BinaryTreeNode<E> node = validate(p);
+    if (numChildren(p) == 2) {
+     throw new IllegalArgumentException("p has two children");
+    }
+    	     BinaryTreeNode<E> child = (node.getLeft( ) != null ? node.getLeft( ) : node.getRight( ) );
+    	     if (child != null) {
+    	       child.setParent(node.getParent( ));  // child's grandparent becomes its parent
+    	     }
+    	     if (node == root) {
+    	       root = child;
+    	     } // child becomes root
+    	     else {
+    	       BinaryTreeNode<E> parent = node.getParent( );
+    	       if (node == parent.getLeft( )) {
+    	         parent.setLeft(child);
+    	       }
+    	       else {
+    	         parent.setRight(child);
+    	       }
+    	     }
+    	     size--;
+    	     E temp = node.getElement( );
+    	     node.setElement(null);           // help garbage collection
+    	     node.setLeft(null);
+    	    node.setRight(null);
+    	    node.setParent(node);            // our convention for defunct node
+    	    return temp;
     }
 
     @Override
