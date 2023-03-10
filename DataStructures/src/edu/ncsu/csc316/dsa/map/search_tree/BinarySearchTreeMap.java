@@ -305,7 +305,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
             if (grandparent == null || grandparent.getElement() == null || grandparent.getElement().getKey() == null) {
             	//Rotate the node to be the new root
             	setRoot(node);
-            	node.setParent(null);
+            	node.setParent(createNode(null, null, null, null));
             }
             else {
             	//Otherwise, link the node as a child of the grandparent

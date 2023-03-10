@@ -73,6 +73,10 @@ public class SplayTreeMapTest {
         //  assertEquals(2, (int)tree.left(tree.root()).getElement().getKey());         
     }
    
+    @Test
+    public void testStuff() {
+    	
+    }
     
 //    /**
 //     * Test the output of the remove(k) behavior
