@@ -16,6 +16,7 @@ import edu.ncsu.csc316.dsa.Position;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley and Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the binary tree
  */

@@ -3,8 +3,6 @@ package edu.ncsu.csc316.dsa.map.search_tree;
 import java.util.Comparator;
 import edu.ncsu.csc316.dsa.Position;
 import edu.ncsu.csc316.dsa.map.AbstractOrderedMap;
-import edu.ncsu.csc316.dsa.map.Map.Entry;
-import edu.ncsu.csc316.dsa.tree.BinaryTree;
 import edu.ncsu.csc316.dsa.tree.LinkedBinaryTree;
 
 /**
@@ -27,6 +25,7 @@ import edu.ncsu.csc316.dsa.tree.LinkedBinaryTree;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley & Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <K> the type of keys stored in the binary search tree
  * @param <V> the type of values associated with keys in the binary search tree
@@ -34,6 +33,9 @@ import edu.ncsu.csc316.dsa.tree.LinkedBinaryTree;
 public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrderedMap<K, V> {
 
     // The BalanceableBinaryTree class is an inner class below
+	/**
+	 * The BalanceableBinarySearchTree that will keep track of the data in the BinarySearchTreeMap
+	 */
     private BalanceableBinaryTree<K, V> tree;
 
     /**
@@ -47,6 +49,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
     /**
      * Constructs a new binary search tree map that uses a provided
      * {@link Comparator} when performing comparisons of keys within the tree
+     * @param compare the comparator to use in the BinarySearchTreeMap
      */
     public BinarySearchTreeMap(Comparator<K> compare) {
         super(compare);
@@ -171,7 +174,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
             }
             // Get the dummy/sentinel node (in case the node has an actual entry as a
             // child)...
-            Position<Entry<K, V>> leaf = (isLeaf(left(p)) ? left(p) : right(p));
+            Position<Entry<K, V>> leaf = isLeaf(left(p)) ? left(p) : right(p);
             // ... then get its sibling (will be another sentinel or an actual entry node)
             Position<Entry<K, V>> sib = sibling(leaf);
             // Remove the leaf NODE (this is your LinkedBinaryTree remove method)
@@ -341,7 +344,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
         	BinaryTreeNode<Entry<K, V>> parent = node.getParent();
         	BinaryTreeNode<Entry<K, V>> grandparent = parent.getParent();
         	
-        	if ((parent.getLeft().equals(node) && grandparent.getLeft().equals(parent)) || 
+        	if (parent.getLeft().equals(node) && grandparent.getLeft().equals(parent) || 
         		 parent.getRight().equals(node) && grandparent.getRight().equals(parent)) {
         		rotate(parent);
         		return parent;
@@ -372,12 +375,16 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
          * represents the height of the node; In a red-black tree, this extra
          * information represents the color of the node
          * 
+         * 
          * @author Dr. King
+         * @author Jeremiah Knizley
          *
          * @param <E> the element stored in the binary search tree node
          */
         protected static class BSTNode<E> extends BinaryTreeNode<E> {
-
+        	/**
+        	 * The property of the node (usually height)
+        	 */
             private int property;
 
             /**

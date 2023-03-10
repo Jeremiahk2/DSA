@@ -10,10 +10,13 @@ import org.junit.Test;
  * an linked binary tree data structure 
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class BinarySearchTreeMapTest {
-
+	/**
+	 * The BinarySearchTreeMap to be used for testing purposes
+	 */
     private BinarySearchTreeMap<Integer, String> tree;
     
     /**

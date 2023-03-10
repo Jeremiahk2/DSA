@@ -10,10 +10,14 @@ import org.junit.Test;
  * an AVL tree data structure 
  *
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class AVLTreeMapTest {
 
+	/**
+	 * The BinarySearchTreeMap to be used for testing purposes
+	 */
     private BinarySearchTreeMap<Integer, String> tree;
     
     /**
@@ -59,7 +63,6 @@ public class AVLTreeMapTest {
         
         
         
-        //TODO: complete this test case
         // You should create test cases to check all the
         // trinode restructuring scenarios. The textbook has visual examples
         // that you can use to create your test cases

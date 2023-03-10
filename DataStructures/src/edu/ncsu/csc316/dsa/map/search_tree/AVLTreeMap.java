@@ -2,7 +2,6 @@ package edu.ncsu.csc316.dsa.map.search_tree;
 
 import java.util.Comparator;
 import edu.ncsu.csc316.dsa.Position;
-import edu.ncsu.csc316.dsa.map.search_tree.BinarySearchTreeMap.BalanceableBinaryTree.BSTNode;
 
 /**
  * The AVLTreeMap is implemented as a linked data structure to support efficient
@@ -26,6 +25,7 @@ import edu.ncsu.csc316.dsa.map.search_tree.BinarySearchTreeMap.BalanceableBinary
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley & Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <K> the type of keys stored in the AVL tree
  * @param <V> the type of values associated with keys in the AVL tree
@@ -43,6 +43,7 @@ public class AVLTreeMap<K extends Comparable<K>, V> extends BinarySearchTreeMap<
     /**
      * Constructs a new AVL tree map that uses a provided {@link Comparator} when
      * performing comparisons of keys within the tree
+     * @param compare the comparator to use in the AVL tree
      */
     public AVLTreeMap(Comparator<K> compare) {
         super(compare);
