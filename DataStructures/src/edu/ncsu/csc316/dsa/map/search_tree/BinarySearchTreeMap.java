@@ -302,10 +302,10 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
         	BinaryTreeNode<Entry<K, V>> grandparent = parent.getParent();
            
             //Check whether the node is a single rotation (no grandparent exists)
-            if (grandparent == null || grandparent.getElement() == null || grandparent.getElement().getValue() == null) {
+            if (grandparent == null) {
             	//Rotate the node to be the new root
             	setRoot(node);
-            	node.setParent(createNode(null, null, null, null));
+            	node.setParent(null);
             }
             else {
             	//Otherwise, link the node as a child of the grandparent
@@ -339,21 +339,20 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
          * @return the position at its final, rotated position
          */
         public Position<Entry<K, V>> restructure(Position<Entry<K, V>> x) {
-            //Track the three nodes involved in the restructuring.
-        	Position<Entry<K, V>> node = x;
-        	Position<Entry<K, V>> parent = parent(node);
+        	//Track the three nodes involved in the restructuring.
+        	Position<Entry<K, V>> parent = parent(x);
         	Position<Entry<K, V>> grandparent = parent(parent);
-        	
-        	if (node.equals(left(parent)) && parent.equals(left(grandparent)) || 
-        		 node.equals(right(parent)) && parent.equals(right(grandparent))) {
+
+        	if (x.equals(left(parent)) && parent.equals(left(grandparent)) || 
+        			x.equals(right(parent)) && parent.equals(right(grandparent))) {
         		rotate(parent);
         		return parent;
         	}
         	else {
         		//rotate the node around the parent twice
-        		rotate(node);
-        		rotate(node);
-        		return node;
+        		rotate(x);
+        		rotate(x);
+        		return x;
         	}
         }
 

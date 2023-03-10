@@ -53,30 +53,29 @@ public class SplayTreeMap<K extends Comparable<K>, V> extends BinarySearchTreeMa
      * @param p the position to splay to be the root of the tree
      */
     private void splay(Position<Entry<K, V>> p) {
-    	Position<Entry<K, V>> node = p;
-    	while (!isRoot(node)) {
+    	while (!isRoot(p)) {
     		Position<Entry<K, V>> parent = parent(p);
     		Position<Entry<K, V>> grandparent = parent(parent);
 
-    		if (grandparent == null || grandparent.getElement() == null || grandparent.getElement().getValue() == null) {
+    		if (grandparent == null) {
     			//ZIG
     			//Perform a single rotation if there is no grandparent
-    			rotate(node);
+    			rotate(p);
     		}
-    		else if ( node.equals(left(parent)) &&  parent.equals(left(grandparent)) || 
-    				node.equals(right(parent)) && parent.equals(right(grandparent))) {
+    		else if ( p.equals(left(parent)) &&  parent.equals(left(grandparent)) || 
+    				p.equals(right(parent)) && parent.equals(right(grandparent))) {
     			//ZIG-ZIG
     			//Rotate the parent around grandparent first
     			rotate(parent);
     			//Then rotate the node around the parent
-    			rotate(node);
+    			rotate(p);
     		}
     		else {
     			//ZIG-ZAG
     			//Rotate node around parent
-    			rotate(node);
+    			rotate(p);
     			//Then rotate node around grandparent
-    			rotate(node);
+    			rotate(p);
     		}
     	}
     }
