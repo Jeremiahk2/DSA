@@ -58,7 +58,7 @@ public class SplayTreeMap<K extends Comparable<K>, V> extends BinarySearchTreeMa
     		Position<Entry<K, V>> parent = parent(node);
     		Position<Entry<K, V>> grandparent = parent(parent);
 
-    		if (grandparent == null) {
+    		if (grandparent == null || grandparent.getElement() == null || grandparent.getElement().getValue() == null) {
     			//ZIG
     			//Perform a single rotation if there is no grandparent
     			rotate(node);
