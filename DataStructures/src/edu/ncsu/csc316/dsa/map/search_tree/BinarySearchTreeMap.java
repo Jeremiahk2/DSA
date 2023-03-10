@@ -309,7 +309,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
             }
             else {
             	//Otherwise, link the node as a child of the grandparent
-            	if (grandparent.getLeft().equals(parent)) {
+            	if (parent.equals(grandparent.getLeft())) {
             		relink(grandparent, node, true);
             	}
             	else {
@@ -318,7 +318,7 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
             }
             //Regardless of whether a grandparent exists,
             //relink the parent and node and transfer node's subtree
-            if (parent.getLeft().equals(node)) {
+            if (node.equals(parent.getLeft())) {
             	relink(parent, node.getRight(), true);
             	relink(node, parent, false);
             }
