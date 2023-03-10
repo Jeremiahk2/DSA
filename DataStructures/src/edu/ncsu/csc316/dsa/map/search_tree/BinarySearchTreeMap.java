@@ -340,12 +340,12 @@ public class BinarySearchTreeMap<K extends Comparable<K>, V> extends AbstractOrd
          */
         public Position<Entry<K, V>> restructure(Position<Entry<K, V>> x) {
             //Track the three nodes involved in the restructuring.
-        	BinaryTreeNode<Entry<K, V>> node = validate(x);
-        	BinaryTreeNode<Entry<K, V>> parent = node.getParent();
-        	BinaryTreeNode<Entry<K, V>> grandparent = parent.getParent();
+        	Position<Entry<K, V>> node = x;
+        	Position<Entry<K, V>> parent = parent(node);
+        	Position<Entry<K, V>> grandparent = parent(parent);
         	
-        	if (parent.getLeft().equals(node) && grandparent.getLeft().equals(parent) || 
-        		 parent.getRight().equals(node) && grandparent.getRight().equals(parent)) {
+        	if (node.equals(left(parent)) && parent.equals(left(grandparent)) || 
+        		 node.equals(right(parent)) && parent.equals(right(grandparent))) {
         		rotate(parent);
         		return parent;
         	}
