@@ -26,15 +26,14 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
     }
 
     private void inOrderHelper(Position<E> p, PositionCollection traversal) {
-    	for (Position<E> c : children(p)) {
-            inOrderHelper(c, traversal);
-            if (isLeaf(validate(c))) {
-            	traversal.add(c);
-            }
-            if (right(p) == null || right(p) != null && !right(p).equals(c)) {
-            	traversal.add(p);
-            }
-        }
+    	if (left(p) != null) {
+    		inOrderHelper(left(p), traversal);
+    	}
+    	traversal.add(p);
+    	if (right(p) != null) {
+    		inOrderHelper(right(p), traversal);
+    	}
+    		  
     }
     
     @Override

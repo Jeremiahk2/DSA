@@ -81,11 +81,11 @@ public class BinarySearchTreeMapTest {
         assertEquals(2, (int)tree.right(tree.root()).getElement().getKey());
         
         Iterator<Integer> it = tree.iterator();
+        assertEquals((Integer)1, it.next());
+        assertEquals((Integer)2, it.next());
+        assertEquals((Integer)3, it.next());
+        assertEquals((Integer)4, it.next());
         assertEquals((Integer)5, it.next());
-//        assertEquals((Integer)2, it.next());
-//        assertEquals((Integer)3, it.next());
-//        assertEquals((Integer)5, it.next());
-//        assertEquals((Integer)4, it.next());
 //        assertEquals("BalanceableBinaryTree[\n"
 //        		+ "edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@2cb4893b\n"
 //        		+ " edu.ncsu.csc316.dsa.map.AbstractMap$MapEntry@cc43f62\n"
@@ -127,6 +127,7 @@ public class BinarySearchTreeMapTest {
         assertNull(tree.remove(1));
         assertEquals("four", tree.get(4));
         assertEquals("zero", tree.get(0));
+        assertEquals(2, tree.size());
         
         
         // You should create tests to ensure removing works
@@ -160,6 +161,17 @@ public class BinarySearchTreeMapTest {
         assertEquals(s3, sTree.left(sTree.root()).getElement().getKey());
         assertEquals(s4, sTree.right(sTree.left(sTree.root())).getElement().getKey());
         assertEquals(s5, sTree.left(sTree.left(sTree.root())).getElement().getKey());
+        Iterator<Student> it = sTree.iterator();
+        System.out.println("");
+        assertEquals(5, sTree.size());
+        assertTrue(it.hasNext());
+        assertEquals(s5, it.next());
+        assertTrue(it.hasNext());
+        assertEquals(s3, it.next());
+        it.next();
+        it.next();
+        it.next();
+        
         
         
     }
