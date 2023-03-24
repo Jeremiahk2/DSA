@@ -16,6 +16,7 @@ import edu.ncsu.csc316.dsa.map.Map;
  */
 public class SeparateChainingHashMapTest {
 
+	/** Map used for testing purposes */
     private Map<Integer, String> map;
     
     /**
@@ -56,7 +57,7 @@ public class SeparateChainingHashMapTest {
         // that our values are in the correct order in the hash table.
         // Alternatively, you could implement a toString() method if you
         // want to check that the exact index/map of each bucket is correct
-        Iterator<Map.Entry<Integer,String>> it = map.entrySet().iterator();
+        Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
         assertEquals(3, (int)it.next().getKey()); // should be in a map in index 4
         
         
@@ -70,6 +71,14 @@ public class SeparateChainingHashMapTest {
         //TODO: complete this test case
         // You should create some collisions to check that entries
         // are placed in the correct buckets
+        map.put(11, "string11");
+        it = map.entrySet().iterator();
+        assertEquals(3, (int)it.next().getKey());
+        assertEquals(4, (int)it.next().getKey()); //4 comes first because of the inOrder traversal of the AVLTreeMap
+        assertEquals(11, (int)it.next().getKey());
+        assertEquals("string3", map.get(3));
+        assertEquals("string4", map.get(4));
+        assertEquals("string11", map.get(11));
     }
     
     /**
