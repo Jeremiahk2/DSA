@@ -43,10 +43,13 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     // Alpha and Beta values for MAD compression
     // This implementation uses a variation of the MAD method
     // where h(k) = ( (alpha * f(k) + beta) % prime) % capacity
+    /** Alpha for compression function */
     private long alpha;
+    /** Beta for compression function */
     private long beta;
 
     // The prime number to use for compression strategy
+    /** Prime for compression function */
     private int prime;
 
     /**

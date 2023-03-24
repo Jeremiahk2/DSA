@@ -2,6 +2,8 @@ package edu.ncsu.csc316.dsa.map.hashing;
 
 import static org.junit.Assert.*;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Before;
 import org.junit.Test;
 import edu.ncsu.csc316.dsa.map.Map;
@@ -68,9 +70,6 @@ public class SeparateChainingHashMapTest {
         assertEquals(3, (int)it.next().getKey()); // should be in a map in index 4
         assertEquals(4, (int)it.next().getKey()); // should be in a map in index 5
         
-        //TODO: complete this test case
-        // You should create some collisions to check that entries
-        // are placed in the correct buckets
         map.put(11, "string11");
         it = map.entrySet().iterator();
         assertEquals(3, (int)it.next().getKey());
@@ -82,21 +81,26 @@ public class SeparateChainingHashMapTest {
     }
     
     /**
-     * Test the output of the get(k) behavior
-     */     
-    @Test
-    public void testGet() {
-        assertTrue(map.isEmpty());
-        //TODO: complete this test case
-    }
-    
-    /**
      * Test the output of the remove(k) behavior
      */     
     @Test
     public void testRemove() {
         assertTrue(map.isEmpty());
-        //TODO: complete this test case
+        assertNull(map.put(4, "string4")); //Same hash as 11
+        assertNull(map.put(3, "string3"));
+        assertNull(map.put(11, "fake11")); //Same hash as 4
+        assertEquals(3, map.size());
+        assertFalse(map.isEmpty());
+        assertEquals("fake11", map.put(11, "string11"));
+        assertEquals(3, map.size());
+        
+        assertEquals("string11", map.remove(11));
+        assertEquals(2, map.size());
+        
+        Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
+        assertEquals(3, (int)it.next().getKey());
+        assertEquals(4, (int)it.next().getKey());
+        assertThrows(NoSuchElementException.class, () -> it.next());
     }
     
     /**
@@ -104,10 +108,12 @@ public class SeparateChainingHashMapTest {
      */   
     @Test
     public void testIterator() {
-        // TODO: add some entries to the hash map
+    	assertNull(map.put(4, "string4")); //Same hash as 11
+        assertNull(map.put(3, "string3"));
+        assertNull(map.put(11, "string11")); //Same hash as 4
         
         Iterator<Integer> it = map.iterator();
-        //TODO: complete this test case
+        assertEquals(3, it.next().)
     }
     
     /**

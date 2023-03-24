@@ -1,7 +1,7 @@
 package edu.ncsu.csc316.dsa.map.hashing;
 
-import edu.ncsu.csc316.dsa.list.List;
-import edu.ncsu.csc316.dsa.list.SinglyLinkedList;
+//import edu.ncsu.csc316.dsa.list.List;
+//import edu.ncsu.csc316.dsa.list.SinglyLinkedList;
 import edu.ncsu.csc316.dsa.map.Map;
 import edu.ncsu.csc316.dsa.map.search_tree.AVLTreeMap;
 
@@ -152,8 +152,12 @@ public class SeparateChainingHashMap<K extends Comparable<K>, V> extends Abstrac
 		if (bucket == null) {
 			return null;
 		}
+		V old = bucket.remove(key);
+		if (old == null) {
+			return null;
+		}
 		size--;
-		return bucket.remove(key);
+		return old;
 	}
 
 	@Override
