@@ -1,0 +1,39 @@
+Much of the code required for CSC316 workshop coding activities is provided
+by the textbook authors. Some workshops will also require additional code
+that is not provided by the textbook authors, and the teaching staff may have
+modified the behaviors or structure/pacakges of some of the provided code.
+You are not required to use the code provided by the textbook authors, but it is
+strongly encouraged to review the code provided by the textbook authors to
+help with debugging. 
+
+If a student wishes to include this DataStructures project as part of a coding
+portfolio or resume materials, the student must clearly indicate what portions
+of the codebase were original (created by the student), which portions of the
+codebase were provided by the textbook authors (cited in class-level Javadoc for
+each relevant class), and which portions of the codebase were provided by other
+students (cited in class-level Javadoc for each relevant class).
+
+The provided code in the textbook is distributed with the following licensing
+information:
+
+/**Copyright 2014, Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser
+ *
+ * Developed for use with the book:
+ *
+ *    Data Structures and Algorithms in Java, Sixth Edition
+ *    Michael T. Goodrich, Roberto Tamassia, and Michael H. Goldwasser
+ *    John Wiley & Sons, 2014
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
