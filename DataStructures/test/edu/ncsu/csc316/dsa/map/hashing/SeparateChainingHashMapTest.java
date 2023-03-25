@@ -148,4 +148,59 @@ public class SeparateChainingHashMapTest {
 		assertEquals("string4", it.next());
 		assertEquals("string11", it.next());
 	}
+    /**
+     * Test to make sure all constructors work. Not all are needed for testing though.
+     */
+    @Test
+    public void testConstructors() {
+    	map = new SeparateChainingHashMap<Integer, String>(true);
+    	//Try adding 18 courses (past capacity)
+    	assertNull(map.put(1, "string"));
+    	assertNull(map.put(2, "string"));
+    	assertNull(map.put(3, "string"));
+    	assertNull(map.put(4, "string"));
+    	assertNull(map.put(5, "string"));
+    	assertNull(map.put(6, "string"));
+    	assertNull(map.put(7, "string"));
+    	assertNull(map.put(8, "string"));
+    	assertNull(map.put(9, "string"));
+    	assertNull(map.put(10, "string"));
+    	assertNull(map.put(11, "string"));
+    	assertNull(map.put(12, "string"));
+    	assertNull(map.put(13, "string"));
+    	assertNull(map.put(14, "string"));
+    	assertNull(map.put(15, "string"));
+    	assertNull(map.put(16, "string"));
+    	assertNull(map.put(17, "string"));
+    	assertNull(map.put(18, "string"));
+    	
+    	map = new SeparateChainingHashMap<Integer, String>(3);
+    	//Try adding 4 courses (past capacity)
+    	assertNull(map.put(1, "string"));
+    	assertNull(map.put(2, "string"));
+    	assertNull(map.put(3, "string"));
+    	assertNull(map.put(4, "string"));
+    	
+    	map = new SeparateChainingHashMap<Integer, String>();
+    	//Try adding 17 courses (past capacity)
+    	assertNull(map.put(1, "string"));
+    	assertNull(map.put(2, "string"));
+    	assertNull(map.put(3, "string"));
+    	assertNull(map.put(4, "string"));
+    	assertNull(map.put(5, "string"));
+    	assertNull(map.put(6, "string"));
+    	assertNull(map.put(7, "string"));
+    	assertNull(map.put(8, "string"));
+    	assertNull(map.put(9, "string"));
+    	assertNull(map.put(10, "string"));
+    	assertNull(map.put(11, "string"));
+    	assertNull(map.put(12, "string"));
+    	assertNull(map.put(13, "string"));
+    	assertNull(map.put(14, "string"));
+    	assertNull(map.put(15, "string"));
+    	assertNull(map.put(16, "string"));
+    	assertNull(map.put(17, "string"));
+    	assertNull(map.put(18, "string"));
+    	
+    }
 }
