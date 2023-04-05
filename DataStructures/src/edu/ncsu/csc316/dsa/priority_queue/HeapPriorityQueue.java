@@ -186,11 +186,11 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
      *              necessary to preserve the min-heap ordering property
      */
     protected void downHeap(int index) {
-        int leftIndex = 2 * index + 1;
-        int rightIndex = 2 * index + 2;
-        if (leftIndex < list.size()) {
+        int leftIndex = left(index);
+        int rightIndex = right(index);
+        if (hasLeft(index)) {
         	int smallestChildIndex = leftIndex;
-        	if (rightIndex < list.size() && compare(list.get(rightIndex).getKey(), list.get(leftIndex).getKey()) < 0) {
+        	if (hasRight(index) && compare(list.get(rightIndex).getKey(), list.get(leftIndex).getKey()) < 0) {
         		smallestChildIndex = rightIndex;
         	}
         	if (compare(list.get(smallestChildIndex).getKey(), list.get(index).getKey()) < 0) {
