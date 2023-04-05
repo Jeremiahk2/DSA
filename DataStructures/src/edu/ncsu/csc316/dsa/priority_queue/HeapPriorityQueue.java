@@ -117,7 +117,9 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
     @Override
     public Entry<K, V> insert(K key, V value) {
         Entry<K, V> temp = createEntry(key, value);
-        // TODO: complete this method
+        list.addLast(temp);
+        upHeap(list.size() - 1);
+        return temp;
     }
 
     @Override
@@ -125,7 +127,7 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
         if (list.isEmpty()) {
             return null;
         }
-        // TODO: complete this method
+        return list.first();
     }
 
     @Override
@@ -133,7 +135,11 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
         if (list.isEmpty()) {
             return null;
         }
-        // TODO: complete this method
+        Entry<K, V> temp = list.first();
+        swap(0, list.size() - 1);
+        list.removeLast();
+        downHeap(0);
+        return temp;
     }
 
     @Override
@@ -150,7 +156,13 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
      *              necessary to preserve the min-heap ordering property
      */
     protected void upHeap(int index) {
-        // TODO: complete this method
+        if (index > 0) {
+        	int parentIndex = (index - 1) / 2;
+        	if (compare(list.get(parentIndex).getKey(), list.get(index).getKey()) > 0) {
+        		swap(parentIndex, index);
+        		upHeap(parentIndex);
+        	}
+        }
     }
 
     /**
@@ -174,6 +186,17 @@ public class HeapPriorityQueue<K extends Comparable<K>, V> extends AbstractPrior
      *              necessary to preserve the min-heap ordering property
      */
     protected void downHeap(int index) {
-        // TODO: complete this method
+        int leftIndex = 2 * index + 1;
+        int rightIndex = 2 * index + 2;
+        if (leftIndex < list.size()) {
+        	int smallestChildIndex = leftIndex;
+        	if (rightIndex < list.size() && compare(list.get(rightIndex).getKey(), list.get(leftIndex).getKey()) < 0) {
+        		smallestChildIndex = rightIndex;
+        	}
+        	if (compare(list.get(smallestChildIndex).getKey(), list.get(index).getKey()) < 0) {
+        		swap(smallestChildIndex, index);
+        		downHeap(smallestChildIndex);
+        	}
+        }
     }
 }

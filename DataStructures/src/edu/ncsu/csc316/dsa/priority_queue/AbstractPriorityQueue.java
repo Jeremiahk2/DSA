@@ -15,7 +15,8 @@ import java.util.Comparator;
  *            queue
  */
 public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> implements PriorityQueue<K, V> {
-
+	
+	/** Custom comparator for keys */
     private Comparator<K> comparator;
 
     /**
@@ -43,6 +44,12 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> implemen
      *
      */
     public class NaturalOrder implements Comparator<K> {
+    	/**
+    	 * Compares first with second.
+    	 * @param first the key being compared with second
+    	 * @param second the key being compared with first
+    	 * @return num < 0 if first comes before second. 0 if equal, num > 0 if first comes after second
+    	 */
         public int compare(K first, K second) {
             return ((Comparable<K>) first).compareTo(second);
         }
@@ -85,8 +92,14 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> implemen
      * @param <V> the type of value stored in the priority queue entry
      */
     public static class PQEntry<K, V> implements Entry<K, V> {
-
+    	
+    	/**
+    	 * The key to go in the entry. Entry's are identified and sorted by key
+    	 */
         private K key;
+        /**
+         * The value to go in the entry. It's the data you want to store
+         */
         private V value;
 
         /**
@@ -134,7 +147,7 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> implemen
      * 
      * @param key   the key (priority) for the new PQEntry
      * @param value the value for the new PQEntry
-     * @return
+     * @return the new entry that was created
      */
     protected Entry<K, V> createEntry(K key, V value) {
         return new PQEntry<K, V>(key, value);
