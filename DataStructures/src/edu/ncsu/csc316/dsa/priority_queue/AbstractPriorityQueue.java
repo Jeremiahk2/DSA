@@ -48,7 +48,7 @@ public abstract class AbstractPriorityQueue<K extends Comparable<K>, V> implemen
     	 * Compares first with second.
     	 * @param first the key being compared with second
     	 * @param second the key being compared with first
-    	 * @return num < 0 if first comes before second. 0 if equal, num > 0 if first comes after second
+    	 * @return num less than 0 if first comes before second. 0 if equal, num greater than 0 if first comes after second
     	 */
         public int compare(K first, K second) {
             return ((Comparable<K>) first).compareTo(second);

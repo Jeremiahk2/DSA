@@ -6,11 +6,11 @@ import edu.ncsu.csc316.dsa.list.ArrayBasedList;
 
 /**
  * A HeapPriorityQueue is an array-based min-heap implementation of the
- * {@link PriorityQueue} abstract data type. HeapPriorityQueue ensures a O(logn)
- * worst-case runtime for {@link PriorityQueue.insert} and
- * {@link PriorityQueue.deleteMin}. HeapPriorityQueue ensures a O(1) worst-case
- * runtime for {@link PriorityQueue.min}, {@link PriorityQueue.size}, and
- * {@link PriorityQueue.isEmpty}.
+ * PriorityQueue abstract data type. HeapPriorityQueue ensures a O(logn)
+ * worst-case runtime for insert and
+ * deleteMin. HeapPriorityQueue ensures a O(1) worst-case
+ * runtime for min, size, and
+ * isEmpty.
  * 
  * The HeapPriorityQueue class is based on an implementation developed for use
  * with the textbook:
