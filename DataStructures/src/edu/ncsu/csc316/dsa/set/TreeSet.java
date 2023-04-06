@@ -20,7 +20,7 @@ import edu.ncsu.csc316.dsa.map.search_tree.AVLTreeMap;
  * textbook:
  *
  * Data Structures and Algorithms in Java, Sixth Edition Michael T. Goodrich,
- * Roberto Tamassia, and Michael H. Goldwasser John Wiley & Sons, 2014
+ * Roberto Tamassia, and Michael H. Goldwasser John Wiley  Sons, 2014
  * 
  * @author Dr. King
  * @author Jeremiah Knizley
@@ -55,10 +55,7 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
 
     @Override
     public boolean contains(E value) {
-    	if (tree.get(value) == null) {
-    		return false;
-    	}
-    	return true;
+    	return tree.get(value) != null;
     }
 
     @Override

@@ -11,7 +11,7 @@ package edu.ncsu.csc316.dsa.set;
  * textbook:
  *
  * Data Structures and Algorithms in Java, Sixth Edition Michael T. Goodrich,
- * Roberto Tamassia, and Michael H. Goldwasser John Wiley & Sons, 2014
+ * Roberto Tamassia, and Michael H. Goldwasser John Wiley  Sons, 2014
  *
  * @author Dr. King
  * @param <E> the type of elements stored in the set
