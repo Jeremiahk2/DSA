@@ -3,7 +3,7 @@ package edu.ncsu.csc316.dsa.set;
 import java.util.Iterator;
 
 import edu.ncsu.csc316.dsa.map.Map;
-import edu.ncsu.csc316.dsa.map.search_tree.BinarySearchTreeMap;
+import edu.ncsu.csc316.dsa.map.search_tree.AVLTreeMap;
 
 /**
  * The TreeSet is implemented as a [REPLACE THIS WITH THE DATA STRUCTURE TYPE YOU CHOSE
@@ -23,6 +23,7 @@ import edu.ncsu.csc316.dsa.map.search_tree.BinarySearchTreeMap;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley & Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  * @param <E> the type of elements stored in the set
  */
@@ -30,14 +31,16 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
     // Since we will delegate to an existing balanced search tree, the entries will
     // be ordered.
     // As a result, we must also restrict our tree set to use Comparable elements.
-    
+    /**
+     * Map that will be used to store our elements in sorted, balanced order.
+     */
     private Map<E, E> tree;
 
     /**
      * Constructs a new TreeSet
      */
     public TreeSet() {
-        tree = new AVLTreeMap();
+        tree = new AVLTreeMap<E, E>();
     }
 
     @Override
@@ -47,21 +50,24 @@ public class TreeSet<E extends Comparable<E>> extends AbstractSet<E> {
 
     @Override
     public void add(E value) {
-        // TODO: Complete this method
+        tree.put(value, value);
     }
 
     @Override
     public boolean contains(E value) {
-        // TODO: Complete this method
+    	if (tree.get(value) == null) {
+    		return false;
+    	}
+    	return true;
     }
 
     @Override
     public E remove(E value) {
-        // TODO: Complete this method
+        return tree.remove(value);
     }
 
     @Override
     public int size() {
-        // TODO: Complete this method
+        return tree.size();
     }
 }
