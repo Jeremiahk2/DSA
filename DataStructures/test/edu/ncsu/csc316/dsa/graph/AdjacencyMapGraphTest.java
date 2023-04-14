@@ -1121,10 +1121,13 @@ public class AdjacencyMapGraphTest {
 		undirectedGraph.insertEdge(v3, v4, 40);
 		undirectedGraph.insertEdge(v3, v5, 45);
 		undirectedGraph.insertEdge(v4, v5, 50);
-
+		
+		//Test remove operations
 		assertEquals(5, undirectedGraph.numVertices());
 		assertEquals(10, undirectedGraph.numEdges());
 		undirectedGraph.removeVertex(v5);
+		//Check that removed vertex keeps its properties
+		assertEquals("Raleigh", v1.getElement());
 		assertEquals(4, undirectedGraph.numVertices());
 		assertEquals(6, undirectedGraph.numEdges());
 		undirectedGraph.removeVertex(v4);
@@ -1204,10 +1207,23 @@ public class AdjacencyMapGraphTest {
 		Edge<Integer> e8 = undirectedGraph.insertEdge(v3, v4, 40);
 		Edge<Integer> e9 = undirectedGraph.insertEdge(v3, v5, 45);
 		Edge<Integer> e10 = undirectedGraph.insertEdge(v4, v5, 50);
+		//Quick test to make sure edges are being stored properly.
+		assertEquals("Edge[element=5]", e1.toString());
+		assertEquals("Edge[element=10]", e2.toString());
+		assertEquals("Edge[element=15]", e3.toString());
+		assertEquals("Edge[element=20]", e4.toString());
+		assertEquals("Edge[element=25]", e5.toString());
+		assertEquals("Edge[element=30]", e6.toString());
+		assertEquals("Edge[element=35]", e7.toString());
+		assertEquals("Edge[element=40]", e8.toString());
+		assertEquals("Edge[element=45]", e9.toString());
+		assertEquals("Edge[element=50]", e10.toString());
 
 		assertEquals(6, undirectedGraph.numVertices());
 		assertEquals(10, undirectedGraph.numEdges());
 		undirectedGraph.removeEdge(e1);
+		//Check to make sure removed edge still exists and can be accessed
+		assertEquals((Integer)5, e1.getElement());
 		assertEquals(6, undirectedGraph.numVertices());
 		assertEquals(9, undirectedGraph.numEdges());
 		undirectedGraph.removeEdge(e2);
