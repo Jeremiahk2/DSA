@@ -3,7 +3,6 @@ package edu.ncsu.csc316.dsa.graph;
 import java.util.Iterator;
 
 import edu.ncsu.csc316.dsa.Position;
-import edu.ncsu.csc316.dsa.graph.Graph.Edge;
 import edu.ncsu.csc316.dsa.list.positional.PositionalLinkedList;
 import edu.ncsu.csc316.dsa.list.positional.PositionalList;
 
@@ -24,8 +23,14 @@ import edu.ncsu.csc316.dsa.list.positional.PositionalList;
  * @param <E> the type of data in the edges in the graph
  */
 public class AdjacencyListGraph<V, E> extends AbstractGraph<V, E> {
-
+	
+	/**
+	 * Positional List of vertices in the Adjacency List
+	 */
     private PositionalList<Vertex<V>> vertexList;
+    /**
+     * Positional List of Edges in the Adjacency List
+     */
     private PositionalList<Edge<E>> edgeList;
 
     /**
@@ -123,8 +128,9 @@ public class AdjacencyListGraph<V, E> extends AbstractGraph<V, E> {
         edge.setPosition(pos);
         // Remember to set the edge's positions in the outgoingEdges 
         //    and incomingEdges lists for the appropriate vertices
-        origin.outgoing.addLast(edge);
-        destination.incoming.addLast(edge);
+        edge.setOutgoingListPosition(origin.outgoing.addLast(edge));
+        edge.setIncomingListPosition(destination.incoming.addLast(edge));
+        
         return edge;
     }
 
@@ -146,9 +152,12 @@ public class AdjacencyListGraph<V, E> extends AbstractGraph<V, E> {
         Vertex<V>[] ends = e.getEndpoints();
         ALVertex origin = validate(ends[0]);
         ALVertex dest = validate(ends[1]);
+        
         edgeList.remove(e.getPosition());
-        origin.outgoing.remove(e.getPosition());
-        dest.incoming.remove(e.getPosition());
+        
+
+        origin.outgoing.remove(e.getOutgoingListPosition());
+        dest.incoming.remove(e.getIncomingListPosition());
     }
 
     /**
@@ -274,6 +283,7 @@ public class AdjacencyListGraph<V, E> extends AbstractGraph<V, E> {
     /**
      * Safely casts a Vertex to an adjacency list vertex
      * 
+     * @param v the vertex to be validated
      * @return an adjacency list vertex representation of the given Vertex
      * @throws IllegalArgumentException if the vertex is not a valid adjacency list
      *                                  vertex
@@ -288,6 +298,7 @@ public class AdjacencyListGraph<V, E> extends AbstractGraph<V, E> {
     /**
      * Safely casts an Edge to an adjacency list edge
      * 
+     * @param e the edge to be validated
      * @return an adjacency list edge representation of the given Edge
      * @throws IllegalArgumentException if the edge is not a valid adjacency list
      *                                  edge
