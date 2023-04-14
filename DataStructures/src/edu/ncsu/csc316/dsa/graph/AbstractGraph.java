@@ -64,7 +64,13 @@ public abstract class AbstractGraph<V, E> implements Graph<V, E> {
      *
      */
     protected class GraphVertex implements Vertex<V> {
+    	/**
+    	 * The data to be stored in the vertex
+    	 */
         private V element;
+        /**
+         * The position in the graph where this vertex is
+         */
         private Position<Vertex<V>> position;
 
         /**
@@ -116,8 +122,17 @@ public abstract class AbstractGraph<V, E> implements Graph<V, E> {
      *
      */
     protected class GraphEdge implements Edge<E> {
+    	/**
+    	 * The data in the edge (usually the length)
+    	 */
         private E element;
+        /**
+         * The two end points of the edge
+         */
         private Vertex<V>[] endpoints;
+        /**
+         * The position in the graph where the edge is
+         */
         private Position<Edge<E>> position;
 
         /**

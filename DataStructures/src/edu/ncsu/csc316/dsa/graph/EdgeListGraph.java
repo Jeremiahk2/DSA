@@ -24,8 +24,14 @@ import edu.ncsu.csc316.dsa.list.positional.PositionalList;
  * @param <E> the type of data in the edges in the graph
  */
 public class EdgeListGraph<V, E> extends AbstractGraph<V, E> {
-
+	
+	/**
+	 * A PositionalList that contains the vertices in the graph
+	 */
     private PositionalList<Vertex<V>> vertexList;
+    /**
+	 * A PositionalList that contains the edges in the graph
+	 */
     private PositionalList<Edge<E>> edgeList;
 
     /**
