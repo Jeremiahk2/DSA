@@ -3,7 +3,7 @@ package edu.ncsu.csc316.dsa.graph;
 import edu.ncsu.csc316.dsa.graph.Graph.Edge;
 import edu.ncsu.csc316.dsa.graph.Graph.Vertex;
 import edu.ncsu.csc316.dsa.map.Map;
-import edu.ncsu.csc316.dsa.map.hashing.LinearProbingHashMap;
+import edu.ncsu.csc316.dsa.map.UnorderedLinkedMap;
 import edu.ncsu.csc316.dsa.queue.ArrayBasedQueue;
 import edu.ncsu.csc316.dsa.set.HashSet;
 import edu.ncsu.csc316.dsa.set.Set;
@@ -37,7 +37,7 @@ public class GraphTraversalUtil {
     	//Use a set to keep track of visited vertices
     	HashSet<Vertex<V>> s = new HashSet<Vertex<V>>();
     	//Use a map to keep track of the forest of discovery edges that discover each vertex 
-    	LinearProbingHashMap<Vertex<V>, Edge<E>> m = new LinearProbingHashMap<Vertex<V>, Edge<E>>();
+    	UnorderedLinkedMap<Vertex<V>, Edge<E>> m = new UnorderedLinkedMap<Vertex<V>, Edge<E>>();
     	
     	dfsHelper(graph, start, s, m);
     	
@@ -70,7 +70,7 @@ public class GraphTraversalUtil {
         //Use a set to keep track of visited vertices
     	HashSet<Vertex<V>> s = new HashSet<Vertex<V>>();
     	//Use a map to keep track of the forest of discovery edges that discover each vertex
-    	LinearProbingHashMap<Vertex<V>, Edge<E>> m = new LinearProbingHashMap<Vertex<V>, Edge<E>>();
+    	UnorderedLinkedMap<Vertex<V>, Edge<E>> m = new UnorderedLinkedMap<Vertex<V>, Edge<E>>();
     	//Use a queue to keep track of reachable vertices
     	ArrayBasedQueue<Vertex<V>> q = new ArrayBasedQueue<Vertex<V>>();
     	
