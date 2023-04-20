@@ -18,6 +18,7 @@ import edu.ncsu.csc316.dsa.set.Set;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley and Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class GraphTraversalUtil {

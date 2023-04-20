@@ -19,6 +19,7 @@ import edu.ncsu.csc316.dsa.set.HashSet;
  * Roberto Tamassia, and Michael H. Goldwasser John Wiley and Sons, 2014
  * 
  * @author Dr. King
+ * @author Jeremiah Knizley
  *
  */
 public class ShortestPathUtil {
@@ -46,7 +47,7 @@ public class ShortestPathUtil {
     	UnorderedLinkedMap<Vertex<V>, Entry<Integer, Vertex<V>>> e = new UnorderedLinkedMap<Vertex<V>, Entry<Integer, Vertex<V>>>();
     	
     	for (Vertex<V> v : graph.vertices()) {
-    		if (s.contains(v)) {
+    		if (v.equals(start)) {
     			c.put(v, 0);
     		}
     		else {
