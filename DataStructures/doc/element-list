@@ -4,4 +4,6 @@ edu.ncsu.csc316.dsa.io
 edu.ncsu.csc316.dsa.list
 edu.ncsu.csc316.dsa.list.positional
 edu.ncsu.csc316.dsa.manager
+edu.ncsu.csc316.dsa.queue
 edu.ncsu.csc316.dsa.sorter
+edu.ncsu.csc316.dsa.stack
